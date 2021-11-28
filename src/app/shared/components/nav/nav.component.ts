@@ -6,7 +6,13 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit {
+	isOpen: boolean = false;
+
 	constructor() {}
 
 	ngOnInit(): void {}
+
+	toggleNav(): void {
+		this.isOpen = !this.isOpen;
+	}
 }
