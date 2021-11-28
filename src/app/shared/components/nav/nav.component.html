@@ -1,14 +1,34 @@
+<!-- TODO: make nav responsive -->
 <mat-toolbar color="primary">
 	<mat-toolbar-row>
-		<span>FindItJob</span>
+		<a routerLink="/f">
+			<span>FindITJob</span>
+		</a>
 		<span class="spacer"></span>
-		<div class="sidenav">
-			<ul>
-				<li><mat-icon>work</mat-icon>Jobs</li>
-				<li><mat-icon>login</mat-icon>Login</li>
-			</ul>
+		<div class="nav" [class.hidden]="isOpen">
+			<mat-list role="list">
+				<mat-list-item role="listitem">
+					<a mat-button href="#">Jobs</a>
+				</mat-list-item>
+				<mat-list-item role="listitem">
+					<a mat-button disabled href="#">Matches</a>
+				</mat-list-item>
+				<mat-list-item role="listitem">
+					<a
+						mat-raised-button
+						[matMenuTriggerFor]="menu"
+						color="accent"
+						href="#"
+						>Login
+					</a>
+					<mat-menu #menu="matMenu">
+						<a mat-menu-item href="#">Login as developer</a>
+						<a mat-menu-item href="#">Login as employer</a>
+					</mat-menu>
+				</mat-list-item>
+			</mat-list>
 		</div>
-		<button mat-icon-button>
+		<button class="hamburger" mat-icon-button (click)="toggleNav()">
 			<mat-icon>menu</mat-icon>
 		</button>
 	</mat-toolbar-row>
