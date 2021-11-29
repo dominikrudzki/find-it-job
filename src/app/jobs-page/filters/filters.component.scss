@@ -1,0 +1,46 @@
+.categories {
+	display: flex;
+	overflow: scroll;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	.category {
+		margin: 15px 0;
+		margin-right: 15px;
+		padding: 0;
+		display: flex;
+
+		label {
+			display: block;
+			padding: 15px;
+		}
+
+		// label[type="checkbox"] {
+		// 	background-color: red;
+		// }
+
+		label > mat-checkbox:checked {
+			background-color: red !important;
+		}
+
+		&:nth-of-type(1) {
+			margin-left: 15px;
+		}
+	}
+}
+
+mat-expansion-panel {
+	margin-bottom: 15px;
+}
+
+mat-radio-group {
+	display: block;
+	margin-bottom: 10px;
+}
+
+.mat-radio-button {
+	margin-right: 16px;
+	margin-bottom: 5px;
+}
