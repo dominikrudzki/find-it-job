@@ -7,6 +7,7 @@ import { NavComponent } from './shared/components/nav/nav.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JobsPageComponent } from './jobs-page/jobs-page.component';
+import { FiltersComponent } from './jobs-page/filters/filters.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,7 +16,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
-import { FiltersComponent } from './jobs-page/filters/filters.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 const materialModules = [
 	MatToolbarModule,
@@ -25,6 +29,10 @@ const materialModules = [
 	MatListModule,
 	MatMenuModule,
 	MatCardModule,
+	MatCheckboxModule,
+	MatExpansionModule,
+	MatRadioModule,
+	MatSlideToggleModule,
 ];
 
 @NgModule({
@@ -33,7 +41,7 @@ const materialModules = [
 		NavComponent,
 		FooterComponent,
 		JobsPageComponent,
-  FiltersComponent,
+		FiltersComponent,
 	],
 	imports: [
 		BrowserModule,
