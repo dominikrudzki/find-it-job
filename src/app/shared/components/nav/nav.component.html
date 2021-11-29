@@ -1,9 +1,14 @@
-<!-- TODO: make nav responsive -->
 <mat-toolbar color="primary">
 	<mat-toolbar-row>
 		<a routerLink="/f">
 			<span>FindITJob</span>
 		</a>
+		<!-- Create dark mode -->
+		<div class="dark-mode">
+			<mat-icon class="mr-8">brightness_5</mat-icon>
+			<mat-slide-toggle class="mr-8"> </mat-slide-toggle>
+			<mat-icon>bedtime</mat-icon>
+		</div>
 		<span class="spacer"></span>
 		<div class="nav" [class.hidden]="isOpen">
 			<mat-list role="list">
@@ -28,6 +33,7 @@
 				</mat-list-item>
 			</mat-list>
 		</div>
+
 		<button class="hamburger" mat-icon-button (click)="toggleNav()">
 			<mat-icon>menu</mat-icon>
 		</button>
