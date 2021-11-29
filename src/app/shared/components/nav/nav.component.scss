@@ -2,12 +2,15 @@
 	flex: 1 1 auto;
 }
 
-.mat-button {
-	padding: 0;
-	text-align: left;
+.dark-mode {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	margin-left: 1em;
 }
 
 .nav {
+	z-index: 100;
 	position: absolute;
 	overflow: hidden;
 	top: 56px;
@@ -49,7 +52,6 @@
 
 	.mat-button {
 		color: #fff;
-		text-align: center;
 	}
 
 	.mat-button-disabled {
