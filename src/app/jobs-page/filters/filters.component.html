@@ -1,1 +1,40 @@
-<p>filters works!</p>
+<section>
+	<div class="categories">
+		<mat-card class="category" *ngFor="let category of categories">
+			<label>
+				<mat-checkbox class="example-margin" [id]="category">{{
+					category
+				}}</mat-checkbox>
+			</label>
+		</mat-card>
+	</div>
+
+	<mat-expansion-panel
+		(opened)="panelOpenState = true"
+		(closed)="panelOpenState = false"
+	>
+		<mat-expansion-panel-header>
+			<mat-panel-title> More filters </mat-panel-title>
+		</mat-expansion-panel-header>
+
+		<p>Remote:</p>
+		<mat-radio-group id="remote">
+			<mat-radio-button value="1" [checked]="true">Any</mat-radio-button>
+			<mat-radio-button value="2">Yes</mat-radio-button>
+			<mat-radio-button value="3">No</mat-radio-button>
+		</mat-radio-group>
+		<p>Experience:</p>
+		<mat-radio-group id="exp">
+			<mat-radio-button value="1" [checked]="true">Any</mat-radio-button>
+			<mat-radio-button value="2">Junior</mat-radio-button>
+			<mat-radio-button value="3">Mid</mat-radio-button>
+			<mat-radio-button value="4">Senior</mat-radio-button>
+		</mat-radio-group>
+	</mat-expansion-panel>
+
+	<mat-card>
+		<mat-card-subtitle> You are searching for: </mat-card-subtitle>
+		<!-- TODO: display selected technologies -->
+		<mat-card-content>C++, Java</mat-card-content>
+	</mat-card>
+</section>
