@@ -3,11 +3,9 @@
 		<a routerLink="/f">
 			<span>FindITJob</span>
 		</a>
-		<!-- Create dark mode -->
+		<!-- TODO: create dark mode -->
 		<div class="dark-mode">
-			<mat-icon class="mr-8">brightness_5</mat-icon>
-			<mat-slide-toggle class="mr-8"> </mat-slide-toggle>
-			<mat-icon>bedtime</mat-icon>
+			<mat-icon>{{ "brightness_5" }}</mat-icon>
 		</div>
 		<span class="spacer"></span>
 		<div class="nav" [class.hidden]="isOpen">
@@ -24,8 +22,9 @@
 						[matMenuTriggerFor]="menu"
 						color="accent"
 						href="#"
-						>Login
+						>Login <mat-icon>expand_more</mat-icon>
 					</a>
+
 					<mat-menu #menu="matMenu">
 						<a mat-menu-item href="#">Login as developer</a>
 						<a mat-menu-item href="#">Login as employer</a>
