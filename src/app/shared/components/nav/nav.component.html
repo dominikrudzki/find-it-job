@@ -1,12 +1,18 @@
 <mat-toolbar color="primary">
 	<mat-toolbar-row>
-		<a routerLink="/f">
+		<a routerLink="/">
 			<span>FindITJob</span>
 		</a>
-		<!-- TODO: create dark mode -->
-		<div class="dark-mode">
-			<mat-icon>{{ "brightness_5" }}</mat-icon>
-		</div>
+		<button
+			mat-mini-fab
+			color="accent"
+			class="dark-mode"
+			(click)="toggleTheme()"
+		>
+			<mat-icon>{{
+				darkTheme.value ? "bedtime" : "brightness_5"
+			}}</mat-icon>
+		</button>
 		<span class="spacer"></span>
 		<div class="nav" [class.hidden]="isOpen">
 			<mat-list role="list">
