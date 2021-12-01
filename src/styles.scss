@@ -1,12 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 html,
 body {
 	height: 100%;
-}
-body {
 	margin: 0;
 	font-family: Roboto, "Helvetica Neue", sans-serif;
+	transition: background-color 0.3s;
+
+	&.darkTheme {
+		background-color: #212120;
+
+		mat-card,
+		mat-list,
+		mat-toolbar-row,
+		mat-expansion-panel,
+		.mat-expansion-panel:not(.mat-expanded):not([aria-disabled="true"])
+			.mat-expansion-panel-header:hover {
+			background-color: #424141;
+		}
+
+		span,
+		.mat-expansion-indicator::after {
+			border-color: #fff;
+		}
+
+		p,
+		span,
+		mat-card-title,
+		mat-panel-title,
+		mat-card-subtitle {
+			color: #fff;
+		}
+
+		.mat-button-disabled span {
+			color: #a5a5a5;
+		}
+	}
 }
 a,
 a:visited,
