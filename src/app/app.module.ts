@@ -8,6 +8,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JobsPageComponent } from './jobs-page/jobs-page.component';
 import { FiltersComponent } from './jobs-page/filters/filters.component';
+import { LoginDialogComponent } from './shared/dialogs/login-dialog/login-dialog.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,6 +21,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatInputModule } from '@angular/material/input';
 
 const materialModules = [
 	MatToolbarModule,
@@ -33,6 +37,9 @@ const materialModules = [
 	MatExpansionModule,
 	MatRadioModule,
 	MatSlideToggleModule,
+	MatDialogModule,
+	MatTabsModule,
+	MatInputModule,
 ];
 
 @NgModule({
@@ -42,6 +49,7 @@ const materialModules = [
 		FooterComponent,
 		JobsPageComponent,
 		FiltersComponent,
+		LoginDialogComponent,
 	],
 	imports: [
 		BrowserModule,
