@@ -1,0 +1,42 @@
+<mat-dialog-content class="mat-typography loginDialog">
+	<button
+		mat-icon-button
+		mat-dialog-close
+		aria-label="close dialog"
+		mat-dialog-close
+	>
+		<mat-icon>close</mat-icon>
+	</button>
+	<mat-tab-group color="accent" mat-align-tabs="center" dynamicHeight>
+		<mat-tab label="Login">
+			<form action="">
+				<mat-form-field appearance="fill">
+					<mat-label>Enter your email</mat-label>
+					<input matInput required />
+				</mat-form-field>
+				<mat-form-field appearance="fill">
+					<mat-label>Enter your password</mat-label>
+					<input type="password" matInput required />
+				</mat-form-field>
+				<button mat-raised-button color="accent">Login</button>
+			</form>
+		</mat-tab>
+		<mat-tab label="Register">
+			<form>
+				<mat-form-field *ngIf="role === 'employer'" appearance="fill">
+					<mat-label>Enter company name</mat-label>
+					<input matInput required />
+				</mat-form-field>
+				<mat-form-field appearance="fill">
+					<mat-label>Enter your email</mat-label>
+					<input matInput required />
+				</mat-form-field>
+				<mat-form-field appearance="fill">
+					<mat-label>Enter your password</mat-label>
+					<input type="password" matInput required />
+				</mat-form-field>
+				<button mat-raised-button color="accent">Register</button>
+			</form>
+		</mat-tab>
+	</mat-tab-group>
+</mat-dialog-content>
