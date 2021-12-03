@@ -17,28 +17,30 @@
 		<div class="nav" [class.hidden]="isOpen">
 			<mat-list role="list">
 				<mat-list-item role="listitem">
-					<a mat-button href="#">Jobs</a>
+					<a mat-button routerLink="/">Jobs</a>
 				</mat-list-item>
 				<mat-list-item role="listitem">
-					<a mat-button disabled href="#">Matches</a>
+					<a mat-button disabled routerLink="/">Matches</a>
 				</mat-list-item>
 				<mat-list-item role="listitem">
 					<a
 						mat-raised-button
 						[matMenuTriggerFor]="menu"
 						color="accent"
-						href="#"
+						routerLink="matches"
 						>Login <mat-icon>expand_more</mat-icon>
 					</a>
-
 					<mat-menu #menu="matMenu">
-						<a mat-menu-item href="#">Login as developer</a>
-						<a mat-menu-item href="#">Login as employer</a>
+						<button mat-menu-item (click)="openDialog('developer')">
+							Login as developer
+						</button>
+						<button mat-menu-item (click)="openDialog('employer')">
+							Login as employer
+						</button>
 					</mat-menu>
 				</mat-list-item>
 			</mat-list>
 		</div>
-
 		<button class="hamburger" mat-icon-button (click)="toggleNav()">
 			<mat-icon>menu</mat-icon>
 		</button>

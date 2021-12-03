@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'src/app/core/services/cookie.service';
+import { LoginDialogComponent } from '../../dialogs/login-dialog/login-dialog.component';
 
 @Component({
 	selector: 'app-nav',
@@ -11,7 +13,10 @@ export class NavComponent implements OnInit {
 	isOpen: boolean = false;
 	darkTheme = new BehaviorSubject<boolean>(false);
 
-	constructor(private cookieService: CookieService) {
+	constructor(
+		private cookieService: CookieService,
+		public dialog: MatDialog
+	) {
 		const darkThemeValue = cookieService.getCookie('darkTheme');
 
 		if (darkThemeValue === '') {
@@ -32,6 +37,12 @@ export class NavComponent implements OnInit {
 
 	toggleNav(): void {
 		this.isOpen = !this.isOpen;
+	}
+
+	openDialog(role: string): void {
+		this.dialog.open(LoginDialogComponent, {
+			data: role,
+		});
 	}
 
 	toggleTheme(): void {
