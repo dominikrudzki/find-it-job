@@ -3,6 +3,12 @@
 
 	mat-card {
 		margin-top: 15px;
+		cursor: pointer;
+		transition: transform 0.3s;
+
+		&:hover {
+			transform: scale(1.01);
+		}
 	}
 }
 
