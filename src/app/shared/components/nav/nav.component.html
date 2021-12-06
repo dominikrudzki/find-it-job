@@ -28,14 +28,33 @@
 						[matMenuTriggerFor]="menu"
 						color="accent"
 						routerLink="matches"
-						>Login <mat-icon>expand_more</mat-icon>
+						>{{ isLogged ? "Profile" : "Login" }}
+						<mat-icon>expand_more</mat-icon>
 					</a>
-					<mat-menu #menu="matMenu">
-						<button mat-menu-item (click)="openDialog('developer')">
+					<mat-menu #menu="matMenu" [ngSwitch]="isLogged">
+						<button
+							mat-menu-item
+							*ngSwitchCase="false"
+							(click)="openDialog('developer')"
+						>
 							Login as developer
 						</button>
-						<button mat-menu-item (click)="openDialog('employer')">
+						<button
+							mat-menu-item
+							*ngSwitchCase="false"
+							(click)="openDialog('employer')"
+						>
 							Login as employer
+						</button>
+
+						<button mat-menu-item *ngSwitchCase="true">
+							Settings
+						</button>
+						<button mat-menu-item *ngSwitchCase="true">
+							Matchmaking
+						</button>
+						<button mat-menu-item *ngSwitchCase="true">
+							Logout
 						</button>
 					</mat-menu>
 				</mat-list-item>

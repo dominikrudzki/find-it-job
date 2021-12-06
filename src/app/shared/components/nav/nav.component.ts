@@ -10,6 +10,7 @@ import { LoginDialogComponent } from '../../dialogs/login-dialog/login-dialog.co
 	styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit {
+	isLogged: boolean = false;
 	isOpen: boolean = false;
 	darkTheme = new BehaviorSubject<boolean>(false);
 
