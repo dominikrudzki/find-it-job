@@ -10,6 +10,10 @@ import { JobsPageComponent } from './jobs-page/jobs-page.component';
 import { FiltersComponent } from './jobs-page/filters/filters.component';
 import { LoginDialogComponent } from './shared/dialogs/login-dialog/login-dialog.component';
 
+import { StoreModule } from '@ngrx/store';
+import { userInfoReducer } from './shared/store/reducers/userInfo.reducer';
+import { filterPreferencesReducer } from './shared/store/reducers/filterPreferences.reducer';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -56,6 +60,10 @@ const materialModules = [
 		AppRoutingModule,
 		BrowserAnimationsModule,
 		materialModules,
+		StoreModule.forRoot({
+			userInfo: userInfoReducer,
+			filterPreferences: filterPreferencesReducer,
+		}),
 	],
 	providers: [],
 	bootstrap: [AppComponent],
