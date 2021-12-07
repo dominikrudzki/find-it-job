@@ -20,7 +20,7 @@
 					<a mat-button routerLink="/">Jobs</a>
 				</mat-list-item>
 				<mat-list-item role="listitem">
-					<a mat-button disabled routerLink="/">Matches</a>
+					<a mat-button disabled routerLink="/">IT Stats</a>
 				</mat-list-item>
 				<mat-list-item role="listitem">
 					<a
@@ -28,10 +28,10 @@
 						[matMenuTriggerFor]="menu"
 						color="accent"
 						routerLink="matches"
-						>{{ isLogged ? "Profile" : "Login" }}
+						>{{ ($isLogged | async) ? "Profile" : "Login" }}
 						<mat-icon>expand_more</mat-icon>
 					</a>
-					<mat-menu #menu="matMenu" [ngSwitch]="isLogged">
+					<mat-menu #menu="matMenu" [ngSwitch]="$isLogged | async">
 						<button
 							mat-menu-item
 							*ngSwitchCase="false"

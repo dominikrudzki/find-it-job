@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BehaviorSubject } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { CookieService } from 'src/app/core/services/cookie.service';
 import { LoginDialogComponent } from '../../dialogs/login-dialog/login-dialog.component';
 
@@ -10,15 +11,18 @@ import { LoginDialogComponent } from '../../dialogs/login-dialog/login-dialog.co
 	styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit {
-	isLogged: boolean = false;
+	$isLogged: Observable<boolean> = this.store.select('userInfo'); //TODO: change when logged
 	isOpen: boolean = false;
 	darkTheme = new BehaviorSubject<boolean>(false);
 
 	constructor(
+		private readonly store: Store<{
+			userInfo: boolean;
+		}>,
 		private cookieService: CookieService,
 		public dialog: MatDialog
 	) {
-		const darkThemeValue = cookieService.getCookie('darkTheme');
+		const darkThemeValue = this.cookieService.getCookie('darkTheme');
 
 		if (darkThemeValue === '') {
 			cookieService.setCookie('darkTheme', 'false');
