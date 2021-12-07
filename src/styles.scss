@@ -7,6 +7,10 @@ body {
 	font-family: Roboto, "Helvetica Neue", sans-serif;
 	transition: background-color 0.3s;
 
+	.mat-button-disabled span {
+		color: #a5a5a5;
+	}
+
 	&.darkTheme {
 		background-color: #212120;
 
