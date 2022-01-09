@@ -17,10 +17,6 @@
 			padding: 15px;
 		}
 
-		// label[type="checkbox"] {
-		// 	background-color: red;
-		// }
-
 		label > mat-checkbox:checked {
 			background-color: red !important;
 		}
@@ -43,4 +39,32 @@ mat-radio-group {
 .mat-radio-button {
 	margin-right: 16px;
 	margin-bottom: 5px;
+}
+
+.remote,
+.experience,
+.technologies,
+.tech {
+	background-color: #ff3f80;
+	padding: 0.3em;
+	border-radius: 5px;
+}
+
+.remote {
+	margin-right: 0.5em;
+}
+
+.technologies {
+	padding: 0;
+	background: none;
+	display: block;
+	margin-top: 0.5em;
+	width: fit-content;
+
+	.tech {
+		display: inline-block;
+		margin-right: 0.5em;
+		margin-bottom: 0.5em;
+		background-color: #ff3f80;
+	}
 }
