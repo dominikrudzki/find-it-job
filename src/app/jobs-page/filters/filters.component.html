@@ -2,9 +2,12 @@
 	<div class="categories">
 		<mat-card class="category" *ngFor="let category of categories">
 			<label>
-				<mat-checkbox class="example-margin" [id]="category">{{
-					category
-				}}</mat-checkbox>
+				<mat-checkbox
+					(change)="categoryHandle($event)"
+					class="example-margin"
+					[id]="category"
+					>{{ category }}</mat-checkbox
+				>
 			</label>
 		</mat-card>
 	</div>
@@ -18,30 +21,40 @@
 		</mat-expansion-panel-header>
 
 		<p>Remote:</p>
-		<mat-radio-group id="remote">
-			<mat-radio-button value="1" [checked]="true">Any</mat-radio-button>
-			<mat-radio-button value="2">Yes</mat-radio-button>
-			<mat-radio-button value="3">No</mat-radio-button>
+		<mat-radio-group id="remote" (change)="remoteHandle($event)">
+			<mat-radio-button [checked]="true">Any</mat-radio-button>
+			<mat-radio-button value="true">Yes</mat-radio-button>
+			<mat-radio-button value="false">No</mat-radio-button>
 		</mat-radio-group>
 		<p>Experience:</p>
-		<mat-radio-group id="exp">
-			<mat-radio-button value="1" [checked]="true">Any</mat-radio-button>
-			<mat-radio-button value="2">Junior</mat-radio-button>
-			<mat-radio-button value="3">Mid</mat-radio-button>
-			<mat-radio-button value="4">Senior</mat-radio-button>
+		<mat-radio-group id="exp" (change)="experienceHandle($event)">
+			<mat-radio-button [checked]="true">Any</mat-radio-button>
+			<mat-radio-button value="Junior">Junior</mat-radio-button>
+			<mat-radio-button value="Mid">Mid</mat-radio-button>
+			<mat-radio-button value="Senior">Senior</mat-radio-button>
 		</mat-radio-group>
 	</mat-expansion-panel>
 
-	<mat-card>
+	<mat-card *ngIf="showPreferences">
 		<mat-card-subtitle> You are searching for: </mat-card-subtitle>
-		<!-- TODO: display selected technologies -->
 		<mat-card-content>
-			<!-- experience -->
-			<span>Junior, </span>
-			<!-- remote -->
-			<span>{{ "Remote" }}, </span>
-			<!-- technologies -->
-			<span>C++, Java</span>
+			<span class="remote" *ngIf="preferences.value.remote != null">
+				{{ preferences.value.remote ? "Remote" : "Not remote" }}
+			</span>
+			<span class="experience" *ngIf="preferences.value.experience">
+				{{ preferences.value.experience }}
+			</span>
+			<span
+				class="technologies"
+				*ngIf="preferences.value.technologies?.length !== 0"
+			>
+				<span
+					class="tech"
+					*ngFor="let tech of preferences.value.technologies"
+				>
+					{{ tech }}
+				</span>
+			</span>
 		</mat-card-content>
 	</mat-card>
 </section>
