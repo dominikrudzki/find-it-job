@@ -33,6 +33,21 @@
 			<mat-radio-button value="Mid">Mid</mat-radio-button>
 			<mat-radio-button value="Senior">Senior</mat-radio-button>
 		</mat-radio-group>
+		<p class="salary">
+			Min. salary:
+			<span>
+				{{ preferences.value.minSalary || salary.value / 1000 + "k" }}
+				USD
+			</span>
+		</p>
+		<mat-slider
+			#salary
+			tickInterval="1000"
+			step="1000"
+			min="0"
+			max="50000"
+			aria-label="units"
+		></mat-slider>
 	</mat-expansion-panel>
 
 	<mat-card *ngIf="showPreferences">
