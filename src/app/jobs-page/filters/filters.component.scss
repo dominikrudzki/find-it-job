@@ -32,8 +32,20 @@
 	}
 }
 
+.salary {
+	margin: 0;
+
+	span {
+		color: #ff3f80;
+	}
+}
+
+mat-slider {
+	width: 100%;
+}
+
 mat-expansion-panel {
-	margin-bottom: 15px;
+	margin: 0 15px 15px 15px;
 	max-width: 500px;
 }
 
@@ -44,7 +56,7 @@ mat-radio-group {
 
 .mat-radio-button {
 	margin-right: 16px;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
 }
 
 .remote,
