@@ -30,6 +30,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatSliderModule } from '@angular/material/slider';
 import { JobComponent } from './jobs-page/job/job.component';
+import { JobPreviewComponent } from './job-preview/job-preview.component';
 
 const materialModules = [
 	MatToolbarModule,
@@ -58,6 +59,7 @@ const materialModules = [
 		FiltersComponent,
 		LoginDialogComponent,
   JobComponent,
+  JobPreviewComponent,
 	],
 	imports: [
 		BrowserModule,
