@@ -1,25 +1,4 @@
 <app-filters></app-filters>
 <section class="jobs">
-	<mat-card>
-		<mat-card-header>
-			<div class="job-image">
-				<img
-					src="https://cdn.pixabay.com/photo/2012/04/13/01/51/hamburger-31775_960_720.png"
-					alt="logo"
-				/>
-			</div>
-			<mat-card-title>Junior Frontend Developer</mat-card-title>
-			<mat-card-subtitle>Very Nice Dev Company</mat-card-subtitle>
-			<mat-card-subtitle class="salary"
-				>2 000 - 5 000 USD</mat-card-subtitle
-			>
-		</mat-card-header>
-		<mat-card-content>
-			<div class="tech">
-				<p>JavaScript</p>
-				<p>Styled Components</p>
-				<p>React</p>
-			</div>
-		</mat-card-content>
-	</mat-card>
+	<app-job [job]="job" *ngFor="let job of jobList$ | async"></app-job>
 </section>
