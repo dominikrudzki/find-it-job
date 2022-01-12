@@ -1,10 +1,16 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { JobsPageComponent } from './jobs-page/jobs-page.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {JobPreviewComponent} from './job-preview/job-preview.component';
+import {JobsPageComponent} from './jobs-page/jobs-page.component';
 
 const routes: Routes = [
-	{ path: '', component: JobsPageComponent },
-	{ path: 'matches', component: JobsPageComponent },
+	{
+		path: '', component: JobsPageComponent,
+		children: [
+			{path: 'offers/:link', component: JobPreviewComponent}
+		]
+	},
+	{path: 'matches', component: JobsPageComponent},
 	// TODO: add logos and jobs pages
 ];
 
@@ -12,4 +18,5 @@ const routes: Routes = [
 	imports: [RouterModule.forRoot(routes)],
 	exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}
