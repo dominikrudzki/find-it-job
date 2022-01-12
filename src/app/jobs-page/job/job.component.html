@@ -1,19 +1,17 @@
-<mat-card>
+<mat-card routerLink="/" *ngIf="job">
 	<mat-card-header>
 		<div class="job-image">
-			<img src="https://cdn.pixabay.com/photo/2012/04/13/01/51/hamburger-31775_960_720.png" alt="logo"/>
+			<img [src]="job.image" alt="logo"/>
 		</div>
-		<mat-card-title>Junior Frontend Developer</mat-card-title>
-		<mat-card-subtitle>Very Nice Dev Company</mat-card-subtitle>
+		<mat-card-title>{{job.name}}</mat-card-title>
+		<mat-card-subtitle>{{job.company}}</mat-card-subtitle>
 		<mat-card-subtitle class="salary">
-			2 000 - 5 000 USD
+			{{job.salary.min | currency}} - {{job.salary.max | currency}} USD
 		</mat-card-subtitle>
 	</mat-card-header>
 	<mat-card-content>
 		<div class="tech">
-			<p>JavaScript</p>
-			<p>Styled Components</p>
-			<p>React</p>
+			<p *ngFor="let tech of job.technologies">{{tech}}</p>
 		</div>
 	</mat-card-content>
 </mat-card>
