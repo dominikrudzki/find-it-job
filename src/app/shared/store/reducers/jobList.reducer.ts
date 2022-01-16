@@ -4,6 +4,7 @@ import {Job} from "../models/jobList.model";
 
 export const initialState: Array<Job> = [
 	{
+		id: 0,
 		name: 'Junior Frontend Developer',
 		image: 'https://cdn.pixabay.com/photo/2012/04/13/01/51/hamburger-31775_960_720.png',
 		company: 'Very Nice Dev Company',
@@ -11,6 +12,7 @@ export const initialState: Array<Job> = [
 		technologies: ['JavaScript', 'Styled Components', 'React']
 	},
 	{
+		id: 1,
 		name: 'Mid Backend Developer',
 		image: 'https://cdn.pixabay.com/photo/2012/04/24/16/15/broccoli-40295_960_720.png',
 		company: 'New Backend Company',
@@ -18,6 +20,7 @@ export const initialState: Array<Job> = [
 		technologies: ['Python', 'Ruby']
 	},
 	{
+		id: 2,
 		name: 'Senior Fullstack Developer',
 		image: 'https://cdn.pixabay.com/photo/2013/07/13/10/41/hat-157581_960_720.png',
 		company: 'Fullstack Company',
@@ -25,6 +28,7 @@ export const initialState: Array<Job> = [
 		technologies: ['Angular', '.Net', 'AWS', 'Blockchain']
 	},
 	{
+		id: 3,
 		name: 'Intern React Developer',
 		image: 'https://cdn.pixabay.com/photo/2013/07/12/15/55/laurel-wreath-150577_960_720.png',
 		company: 'New Company',
