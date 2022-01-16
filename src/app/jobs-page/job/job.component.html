@@ -1,4 +1,4 @@
-<mat-card routerLink="/" *ngIf="job">
+<mat-card [routerLink]="['job-offers', job.id]" *ngIf="job">
 	<mat-card-header>
 		<div class="job-image">
 			<img [src]="job.image" alt="logo"/>
