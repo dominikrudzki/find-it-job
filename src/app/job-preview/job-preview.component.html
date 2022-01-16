@@ -1,1 +1,43 @@
-<p>job-preview works!</p>
+<mat-card class="job-card">
+	<mat-card-header>
+		<div mat-card-avatar class="image"
+			 [style.background-image]="'url(https://cdn.pixabay.com/photo/2013/07/13/10/41/hat-157581_960_720.png)'"></div>
+		<mat-card-title>Senior Fullstack Developer</mat-card-title>
+		<mat-card-subtitle>Fullstack Company</mat-card-subtitle>
+		<mat-card-subtitle class="salary">
+			{{job.salary.min | currency}} - {{job.salary.max | currency}} USD
+		</mat-card-subtitle>
+	</mat-card-header>
+	<mat-card-content>
+		<h3>Job description</h3>
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium perspiciatis quasi ratione. Asperiores
+			blanditiis consequatur culpa cum est ex facilis nemo, pariatur perferendis provident, quod sit! Deserunt
+			necessitatibus nobis ratione?
+		</p>
+		<h3>Benefits</h3>
+		<ul>
+			<li>Remote work</li>
+			<li>International team</li>
+		</ul>
+		<h3>Requirements</h3>
+		<ul>
+			<li>Angular</li>
+			<li>Good English language</li>
+			<li>5+ years of experience in Angular</li>
+		</ul>
+		<h4>Skills</h4>
+		<div class="skill">
+			<mat-icon>done</mat-icon>
+			<mat-icon>done</mat-icon>
+			<mat-icon>done</mat-icon>
+			<span>Angular</span>
+		</div>
+		<div class="skill">
+			<mat-icon>done</mat-icon>
+			<mat-icon>done</mat-icon>
+			<mat-icon>done</mat-icon>
+			<span>.NET</span>
+		</div>
+	</mat-card-content>
+</mat-card>
