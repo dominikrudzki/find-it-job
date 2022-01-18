@@ -1,20 +1,108 @@
 .job-card {
 	margin: 15px;
+
+	mat-card-header {
+
+		.image {
+			padding: 10px;
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+
+		mat-card-subtitle {
+			margin: 0;
+		}
+	}
+
+	mat-card-content {
+		.details {
+			margin-bottom: 2em;
+
+			p {
+				margin: 0;
+			}
+
+			.accent {
+				color: #ff3e7f;
+				font-weight: 700;
+			}
+		}
+
+		div {
+			ul {
+				list-style-type: square;
+				padding-left: 2em;
+
+				li {
+					margin-bottom: 1em;
+				}
+			}
+		}
+
+		.skills {
+			.skill {
+				display: flex;
+				align-items: center;
+
+				.active {
+					color: #ff3e7f;
+				}
+
+				span {
+					margin-left: .5em;
+				}
+			}
+		}
+	}
 }
 
-mat-card-subtitle {
-	margin: 0;
+mat-card-header, .details {
+	padding-bottom: 1em;
+	margin-bottom: 1em;
+	border-bottom: 1px solid #6c6565;
 }
 
-.salary {
+h3 {
+	padding-left: .5em;
+	padding-bottom: .2em;
 	display: inline-block;
-	color: #ff3e7f;
-	font-weight: 700;
+	position: relative;
 }
 
-.image {
-	padding: 10px;
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+h3::before {
+	content: "";
+	display: block;
+	position: absolute;
+	left: 0;
+	width: 3px;
+	height: 100%;
+	border-radius: 15px 15px 0 15px;
+	background-color: #ff3e7f;
+}
+
+h3::after {
+	content: "";
+	display: block;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 110%;
+	height: 3px;
+	border-radius: 0 15px 15px 15px;
+	background-color: #ff3e7f;
+}
+
+.apply-btn {
+	position: sticky;
+	width: 100%;
+	bottom: 15px;
+
+	button {
+		display: block;
+		width: calc(100% - 30px);
+		margin: 0 auto 15px;
+		font-size: 20px;
+		padding: .4em;
+	}
 }
