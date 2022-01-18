@@ -1,6 +1,6 @@
 import {createReducer, on} from '@ngrx/store';
 import {setJobList, getJobList} from '../actions/jobList.actions';
-import {Job} from "../models/jobList.model";
+import {Job} from "../../interfaces/jobList.interface";
 
 export const initialState: Array<Job> = [
 	{

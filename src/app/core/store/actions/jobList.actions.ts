@@ -1,5 +1,5 @@
 import {createAction, props} from '@ngrx/store';
-import {Job} from "../models/jobList.model";
+import {Job} from "../../interfaces/jobList.interface";
 
 export const setJobList = createAction(
 	'[JobList] Set jobList',

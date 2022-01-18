@@ -9,11 +9,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {JobsPageComponent} from './jobs-page/jobs-page.component';
 import {FiltersComponent} from './jobs-page/filters/filters.component';
 import {LoginDialogComponent} from './shared/dialogs/login-dialog/login-dialog.component';
+import {JobComponent} from './jobs-page/job/job.component';
+import {JobPreviewComponent} from './job-preview/job-preview.component';
 
 import {StoreModule} from '@ngrx/store';
-import {userInfoReducer} from './shared/store/reducers/userInfo.reducer';
-import {filterPreferencesReducer} from './shared/store/reducers/filterPreferences.reducer';
-import {jobListReducer} from "./shared/store/reducers/jobList.reducer";
+import {userInfoReducer} from './core/store/reducers/userInfo.reducer';
+import {filterPreferencesReducer} from './core/store/reducers/filterPreferences.reducer';
+import {jobListReducer} from "./core/store/reducers/jobList.reducer";
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
@@ -30,10 +32,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatInputModule} from '@angular/material/input';
 import {MatSliderModule} from '@angular/material/slider';
-import {JobComponent} from './jobs-page/job/job.component';
-import {JobPreviewComponent} from './job-preview/job-preview.component';
 
-import {CurrencyPipe} from './shared/pipes/currency.pipe';
+import {CurrencyPipe} from './core/pipes/currency.pipe';
 
 const materialModules = [
 	MatToolbarModule,
