@@ -21,7 +21,7 @@ body {
 		mat-toolbar-row,
 		mat-expansion-panel,
 		.mat-expansion-panel:not(.mat-expanded):not([aria-disabled="true"])
-			.mat-expansion-panel-header:hover {
+		.mat-expansion-panel-header:hover {
 			background-color: #424141;
 		}
 
@@ -31,6 +31,8 @@ body {
 		}
 
 		p,
+		h3,
+		li,
 		span,
 		mat-label,
 		input,
@@ -46,6 +48,7 @@ body {
 		}
 	}
 }
+
 a,
 a:visited,
 a:hover,
