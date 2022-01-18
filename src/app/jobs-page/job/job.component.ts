@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Job} from "../../shared/store/models/jobList.model";
+import {Job} from "../../core/interfaces/jobList.interface";
 
 @Component({
 	selector: 'app-job',
@@ -14,5 +14,4 @@ export class JobComponent implements OnInit {
 
 	ngOnInit(): void {
 	}
-
 }

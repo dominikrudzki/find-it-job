@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Job} from "../shared/store/models/jobList.model";
+import {Job} from "../core/interfaces/jobList.interface";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 
@@ -19,4 +19,7 @@ export class JobsPageComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
+	loadMoreJobs() {
+		//	TODO: create load more jobs
+	}
 }

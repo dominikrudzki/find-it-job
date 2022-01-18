@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { MatCheckboxChange } from '@angular/material/checkbox';
-import { MatRadioChange } from '@angular/material/radio';
-import { Store } from '@ngrx/store';
-import { BehaviorSubject } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {MatCheckboxChange} from '@angular/material/checkbox';
+import {MatRadioChange} from '@angular/material/radio';
+import {Store} from '@ngrx/store';
+import {BehaviorSubject} from 'rxjs';
 import {
 	addTechnology,
 	deleteTechnology,
 	setExperience,
 	setRemote,
-} from 'src/app/shared/store/actions/filterPreferences.actions';
-import { Preferences } from 'src/app/shared/store/models/filterPreferences.model';
+} from 'src/app/core/store/actions/filterPreferences.actions';
+import {Preferences} from 'src/app/core/interfaces/filterPreferences.interface';
 
 @Component({
 	selector: 'app-filters',
@@ -17,24 +17,13 @@ import { Preferences } from 'src/app/shared/store/models/filterPreferences.model
 	styleUrls: ['./filters.component.scss'],
 })
 export class FiltersComponent implements OnInit {
-	categories: string[] = [
-		'C++',
-		'C#',
-		'JavaScript',
-		'PHP',
-		'Java',
-		'Python',
-		'.Net',
-		'Ruby',
-	];
+	categories: string[] = ['C++', 'C#', 'JavaScript', 'PHP', 'Java', 'Python', '.Net', 'Ruby'];
 
 	showPreferences: boolean = false;
 	preferences: BehaviorSubject<Preferences> = new BehaviorSubject({});
 	panelOpenState = false;
 
-	constructor(private store: Store<{ filterPreferences: any }>) {}
-
-	ngOnInit(): void {
+	constructor(private store: Store<{ filterPreferences: any }>) {
 		this.store.select('filterPreferences').subscribe((obs) => {
 			this.preferences.next(obs);
 
@@ -51,20 +40,23 @@ export class FiltersComponent implements OnInit {
 		});
 	}
 
+	ngOnInit(): void {
+	}
+
 	remoteHandle(event: MatRadioChange) {
-		this.store.dispatch(setRemote({ remote: event.value }));
+		this.store.dispatch(setRemote({remote: event.value}));
 	}
 
 	experienceHandle(event: MatRadioChange) {
-		this.store.dispatch(setExperience({ exp: event.value }));
+		this.store.dispatch(setExperience({exp: event.value}));
 	}
 
 	categoryHandle(event: MatCheckboxChange) {
 		if (event.checked) {
-			this.store.dispatch(addTechnology({ technology: event.source.id }));
+			this.store.dispatch(addTechnology({technology: event.source.id}));
 		} else {
 			this.store.dispatch(
-				deleteTechnology({ technology: event.source.id })
+				deleteTechnology({technology: event.source.id})
 			);
 		}
 	}
