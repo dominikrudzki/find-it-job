@@ -1,43 +1,60 @@
 <mat-card class="job-card">
 	<mat-card-header>
-		<div mat-card-avatar class="image"
-			 [style.background-image]="'url(https://cdn.pixabay.com/photo/2013/07/13/10/41/hat-157581_960_720.png)'"></div>
-		<mat-card-title>Senior Fullstack Developer</mat-card-title>
-		<mat-card-subtitle>Fullstack Company</mat-card-subtitle>
-		<mat-card-subtitle class="salary">
-			{{job.salary.min | currency}} - {{job.salary.max | currency}} USD
-		</mat-card-subtitle>
+		<div mat-card-avatar class="image" [style.background-image]="'url('+job.image+')'"></div>
+		<mat-card-title>{{job.name}}</mat-card-title>
+		<mat-card-subtitle>{{job.company}}</mat-card-subtitle>
 	</mat-card-header>
 	<mat-card-content>
-		<h3>Job description</h3>
-		<p>
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium perspiciatis quasi ratione. Asperiores
-			blanditiis consequatur culpa cum est ex facilis nemo, pariatur perferendis provident, quod sit! Deserunt
-			necessitatibus nobis ratione?
-		</p>
-		<h3>Benefits</h3>
-		<ul>
-			<li>Remote work</li>
-			<li>International team</li>
-		</ul>
-		<h3>Requirements</h3>
-		<ul>
-			<li>Angular</li>
-			<li>Good English language</li>
-			<li>5+ years of experience in Angular</li>
-		</ul>
-		<h4>Skills</h4>
-		<div class="skill">
-			<mat-icon>done</mat-icon>
-			<mat-icon>done</mat-icon>
-			<mat-icon>done</mat-icon>
-			<span>Angular</span>
+		<div class="details">
+			<div *ngIf="job.experience">
+				<p>Exp: <span class="accent">Senior</span></p>
+			</div>
+			<div *ngIf="job.salary">
+				<p>Salary: <span class="accent">{{job.salary.min | currency}} - {{job.salary.max | currency}} USD</span>
+				</p>
+			</div>
+			<div>
+				<p>Remote: <span class="accent">{{job.remote ? 'yes' : 'no'}}</span></p>
+			</div>
 		</div>
-		<div class="skill">
-			<mat-icon>done</mat-icon>
-			<mat-icon>done</mat-icon>
-			<mat-icon>done</mat-icon>
-			<span>.NET</span>
+
+		<div *ngIf="job.description">
+			<h3>Job description</h3>
+			<p>{{job.description}}</p>
+		</div>
+
+		<div *ngIf="job.benefits">
+			<h3>Benefits</h3>
+			<ul>
+				<li *ngFor="let benefit of job.benefits">
+					<span>{{benefit}}</span>
+				</li>
+			</ul>
+		</div>
+
+		<div *ngIf="job.requirements">
+			<h3>Requirements</h3>
+			<ul>
+				<li *ngFor="let requirement of job.requirements">
+					<span>{{requirement}}</span>
+				</li>
+			</ul>
+		</div>
+
+		<div class="skills" *ngIf="job.skills">
+			<h3>Skills</h3>
+			<div class="skill" *ngFor="let skill of job.skills">
+				<mat-icon class="active">done</mat-icon>
+				<mat-icon [ngClass]="{'active': 2 <= skill.level}">done</mat-icon>
+				<mat-icon [ngClass]="{'active': 3 <= skill.level}">done</mat-icon>
+				<mat-icon [ngClass]="{'active': 4 <= skill.level}">done</mat-icon>
+				<mat-icon [ngClass]="{'active': 5 <= skill.level}">done</mat-icon>
+				<span>{{skill.name}}</span>
+			</div>
 		</div>
 	</mat-card-content>
 </mat-card>
+
+<div class="apply-btn">
+	<button mat-raised-button color="accent" (click)="apply()">Apply</button>
+</div>
