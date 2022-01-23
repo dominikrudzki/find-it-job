@@ -5,7 +5,7 @@ import {
 	getPreferences,
 	setExperience,
 	setRemote,
-} from '../actions/filterPreferences.actions';
+} from './filterPreferences.actions';
 import {Preferences} from '../../interfaces/filterPreferences.interface';
 
 export const initialState: Preferences = {
