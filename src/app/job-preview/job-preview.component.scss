@@ -1,8 +1,12 @@
+:host {
+	padding-top: 15px;
+	display: block;
+}
+
 .job-card {
-	margin: 15px;
+	margin: 0px 15px 15px 15px;
 
 	mat-card-header {
-
 		.image {
 			padding: 10px;
 			background-size: contain;
