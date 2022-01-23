@@ -8,7 +8,7 @@ import {
 	deleteTechnology,
 	setExperience,
 	setRemote,
-} from 'src/app/core/store/actions/filterPreferences.actions';
+} from 'src/app/core/state/filterPreferences/filterPreferences.actions';
 import {Preferences} from 'src/app/core/interfaces/filterPreferences.interface';
 
 @Component({
