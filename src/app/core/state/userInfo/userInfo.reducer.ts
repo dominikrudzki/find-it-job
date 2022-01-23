@@ -1,6 +1,6 @@
 import {createReducer, on} from '@ngrx/store';
 
-import {setLogin, getIsLogged} from '../actions/userInfo.actions';
+import {setLogin, getIsLogged} from './userInfo.actions';
 import {userInfo} from '../../interfaces/userInfo.interface';
 
 export const initialLoginState: userInfo = {
