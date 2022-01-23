@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Job} from "../../core/interfaces/jobList.interface";
+import {JobDetails} from "../../core/interfaces/jobDetails.interface";
 
 @Component({
 	selector: 'app-job',
@@ -7,7 +7,7 @@ import {Job} from "../../core/interfaces/jobList.interface";
 	styleUrls: ['./job.component.scss']
 })
 export class JobComponent implements OnInit {
-	@Input() job?: Job;
+	@Input() job?: JobDetails;
 
 	constructor() {
 	}
