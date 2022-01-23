@@ -1,60 +1,74 @@
-<mat-card class="job-card">
-	<mat-card-header>
-		<div mat-card-avatar class="image" [style.background-image]="'url('+job.image+')'"></div>
-		<mat-card-title>{{job.name}}</mat-card-title>
-		<mat-card-subtitle>{{job.company}}</mat-card-subtitle>
-	</mat-card-header>
-	<mat-card-content>
-		<div class="details">
-			<div *ngIf="job.experience">
-				<p>Exp: <span class="accent">Senior</span></p>
+<ng-container *ngIf="job">
+	<mat-card class="job-card">
+		<mat-card-header>
+			<!--		<div mat-card-avatar class="image" [style.background-image]="'url('+job.image+')'"></div>-->
+			<div mat-card-avatar class="image"
+				 [style.background-image]="'url(https://cdn.pixabay.com/photo/2013/07/13/10/41/hat-157581_960_720.png)'"></div>
+			<mat-card-title>{{job.name}}</mat-card-title>
+			<mat-card-subtitle>{{job.company}}</mat-card-subtitle>
+		</mat-card-header>
+		<mat-card-content>
+			<div class="details">
+				<div *ngIf="job.experience">
+					<p>Exp: <span class="accent">Senior</span></p>
+				</div>
+				<div *ngIf="job.salary">
+					<p>Salary: <span class="accent">{{job.salary.min | currency}} - {{job.salary.max | currency}}
+						USD</span>
+					</p>
+				</div>
+				<div>
+					<p>Remote: <span class="accent">{{job.remote ? 'Yes' : 'No'}}</span></p>
+				</div>
 			</div>
-			<div *ngIf="job.salary">
-				<p>Salary: <span class="accent">{{job.salary.min | currency}} - {{job.salary.max | currency}} USD</span>
-				</p>
+
+			<div *ngIf="job.description">
+				<h3>Job description</h3>
+				<p>{{job.description}}</p>
 			</div>
-			<div>
-				<p>Remote: <span class="accent">{{job.remote ? 'yes' : 'no'}}</span></p>
+
+			<div *ngIf="job.benefits">
+				<h3>Benefits</h3>
+				<ul>
+					<li *ngFor="let benefit of job.benefits">
+						<span>{{benefit}}</span>
+					</li>
+				</ul>
 			</div>
-		</div>
 
-		<div *ngIf="job.description">
-			<h3>Job description</h3>
-			<p>{{job.description}}</p>
-		</div>
-
-		<div *ngIf="job.benefits">
-			<h3>Benefits</h3>
-			<ul>
-				<li *ngFor="let benefit of job.benefits">
-					<span>{{benefit}}</span>
-				</li>
-			</ul>
-		</div>
-
-		<div *ngIf="job.requirements">
-			<h3>Requirements</h3>
-			<ul>
-				<li *ngFor="let requirement of job.requirements">
-					<span>{{requirement}}</span>
-				</li>
-			</ul>
-		</div>
-
-		<div class="skills" *ngIf="job.skills">
-			<h3>Skills</h3>
-			<div class="skill" *ngFor="let skill of job.skills">
-				<mat-icon class="active">done</mat-icon>
-				<mat-icon [ngClass]="{'active': 2 <= skill.level}">done</mat-icon>
-				<mat-icon [ngClass]="{'active': 3 <= skill.level}">done</mat-icon>
-				<mat-icon [ngClass]="{'active': 4 <= skill.level}">done</mat-icon>
-				<mat-icon [ngClass]="{'active': 5 <= skill.level}">done</mat-icon>
-				<span>{{skill.name}}</span>
+			<div *ngIf="job.requirements">
+				<h3>Requirements</h3>
+				<ul>
+					<li *ngFor="let requirement of job.requirements">
+						<span>{{requirement}}</span>
+					</li>
+				</ul>
 			</div>
-		</div>
-	</mat-card-content>
-</mat-card>
 
-<div class="apply-btn">
-	<button mat-raised-button color="accent" (click)="apply()">Apply</button>
-</div>
+			<div class="skills" *ngIf="job.skills">
+				<h3>Skills</h3>
+				<div class="skill" *ngFor="let skill of job.skills">
+					<mat-icon class="active">done</mat-icon>
+					<mat-icon [ngClass]="{'active': 2 <= skill.level}">done</mat-icon>
+					<mat-icon [ngClass]="{'active': 3 <= skill.level}">done</mat-icon>
+					<mat-icon [ngClass]="{'active': 4 <= skill.level}">done</mat-icon>
+					<mat-icon [ngClass]="{'active': 5 <= skill.level}">done</mat-icon>
+					<span>{{skill.name}}</span>
+				</div>
+			</div>
+		</mat-card-content>
+	</mat-card>
+
+	<div class="apply-btn">
+		<button mat-raised-button color="accent" (click)="apply()">Apply</button>
+	</div>
+</ng-container>
+
+<ng-container *ngIf="!job">
+	<mat-card class="job-card" routerLink="/">
+		<p>Sorry, we couldn't find the job you are looking for :(</p>
+		<button mat-raised-button color="accent">
+			Back to jobs page
+		</button>
+	</mat-card>
+</ng-container>
