@@ -6,6 +6,12 @@ app-nav {
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
 }
 
-.container {
-	padding: 1em;
+.content {
+	min-height: calc(100vh - 56px - 86px);
+
+	@media (min-width: 599px) {
+		min-height: calc(100vh - 64px - 86px);
+	}
 }
+
+
