@@ -13,9 +13,9 @@ import {JobComponent} from './jobs-page/job/job.component';
 import {JobPreviewComponent} from './job-preview/job-preview.component';
 
 import {StoreModule} from '@ngrx/store';
-import {userInfoReducer} from './core/store/reducers/userInfo.reducer';
-import {filterPreferencesReducer} from './core/store/reducers/filterPreferences.reducer';
-import {jobListReducer} from "./core/store/reducers/jobList.reducer";
+import {userInfoReducer} from './core/state/userInfo/userInfo.reducer';
+import {filterPreferencesReducer} from './core/state/filterPreferences/filterPreferences.reducer';
+import {jobListReducer} from "./core/state/jobList/jobList.reducer";
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
@@ -34,6 +34,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSliderModule} from '@angular/material/slider';
 
 import {CurrencyPipe} from './core/pipes/currency.pipe';
+import {HttpClientModule} from "@angular/common/http";
 
 const materialModules = [
 	MatToolbarModule,
@@ -69,6 +70,7 @@ const materialModules = [
 		BrowserModule,
 		AppRoutingModule,
 		BrowserAnimationsModule,
+		HttpClientModule,
 		materialModules,
 		StoreModule.forRoot({
 			userInfo: userInfoReducer,
