@@ -11,6 +11,8 @@ import { FiltersComponent } from './jobs-page/filters/filters.component'
 import { LoginDialogComponent } from './shared/dialogs/login-dialog/login-dialog.component'
 import { JobComponent } from './jobs-page/job/job.component'
 import { JobPreviewComponent } from './job-preview/job-preview.component'
+import { PostJobComponent } from './post-job/post-job.component'
+import { SettingsComponent } from './settings/settings.component'
 
 import { StoreModule } from '@ngrx/store'
 import { userInfoReducer } from './core/state/userInfo/userInfo.reducer'
@@ -67,7 +69,9 @@ const materialModules = [
 		LoginDialogComponent,
 		JobComponent,
 		JobPreviewComponent,
-		CurrencyPipe
+		CurrencyPipe,
+		PostJobComponent,
+		SettingsComponent
 	],
 	imports: [
 		BrowserModule,
