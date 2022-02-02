@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {Store} from "@ngrx/store";
-import {Observable} from "rxjs";
-import {JobDataService} from "../core/services/job-data.service";
-import {setJobList} from "../core/state/jobList/jobList.actions";
-import {JobDetails} from "../core/interfaces/jobDetails.interface";
+import { Component, OnInit } from '@angular/core'
+import { Store } from "@ngrx/store"
+import { Observable } from "rxjs"
+import { JobDataService } from "../core/services/job-data.service"
+import { setJobList } from "../core/state/jobList/jobList.actions"
+import { JobDetails } from "../core/interfaces/job-details"
 
 @Component({
 	selector: 'app-jobs-page',
@@ -12,10 +12,10 @@ import {JobDetails} from "../core/interfaces/jobDetails.interface";
 })
 export class JobsPageComponent implements OnInit {
 
-	jobList$: Observable<Array<JobDetails>>;
+	jobList$: Observable<Array<JobDetails>>
 
 	constructor(private jobData: JobDataService, private store: Store<{ jobList: Array<JobDetails> }>) {
-		this.jobList$ = this.store.select('jobList');
+		this.jobList$ = this.store.select('jobList')
 	}
 
 	ngOnInit(): void {
