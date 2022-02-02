@@ -1,51 +1,51 @@
-import {createReducer, on} from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store'
 import {
 	addTechnology,
 	deleteTechnology,
 	getPreferences,
 	setExperience,
-	setRemote,
-} from './filterPreferences.actions';
-import {Preferences} from '../../interfaces/filterPreferences.interface';
+	setRemote
+} from './filterPreferences.actions'
+import { Preferences } from '../../interfaces/filter-preferences'
 
 export const initialState: Preferences = {
 	experience: undefined,
 	remote: undefined,
-	technologies: [],
-};
+	technologies: []
+}
 
 export const filterPreferencesReducer = createReducer(
 	initialState,
 	on(setRemote, (state, {remote}) => {
-		const stateCopy = {...state};
+		const stateCopy = {...state}
 		if (remote) {
-			stateCopy.remote = JSON.parse(remote.toLowerCase());
+			stateCopy.remote = JSON.parse(remote.toLowerCase())
 		} else {
-			stateCopy.remote = undefined;
+			stateCopy.remote = undefined
 		}
 
-		state = stateCopy;
-		return state;
+		state = stateCopy
+		return state
 	}),
 	on(setExperience, (state, {exp}) => {
-		const stateCopy = {...state};
-		stateCopy.experience = exp;
-		state = stateCopy;
-		return state;
+		const stateCopy = {...state}
+		stateCopy.experience = exp
+		state = stateCopy
+		return state
 	}),
 	on(getPreferences, (state) => state),
 	on(addTechnology, (state, {technology}) => {
-		const stateCopy = {...state};
-		stateCopy.technologies = [...stateCopy.technologies!, technology];
-		state = stateCopy;
-		return state;
+		const stateCopy = {...state}
+		stateCopy.technologies = [...stateCopy.technologies!, technology]
+		state = stateCopy
+		return state
 	}),
 	on(deleteTechnology, (state, {technology}) => {
-		const stateCopy = {...state};
+		const stateCopy = {...state}
 		stateCopy.technologies = stateCopy.technologies!.filter(
 			(val) => val !== technology
-		);
-		state = stateCopy;
-		return state;
+		)
+		state = stateCopy
+		return state
 	})
-);
+)
