@@ -9,33 +9,39 @@
 	</button>
 	<mat-tab-group color="accent" mat-align-tabs="center" dynamicHeight>
 		<mat-tab label="Login">
-			<form action="">
+			<form [formGroup]="loginGroup" (submit)="login()" novalidate>
 				<mat-form-field appearance="fill">
 					<mat-label>Enter your email</mat-label>
-					<input matInput required />
+					<input type="email" matInput required formControlName="email"/>
 				</mat-form-field>
 				<mat-form-field appearance="fill">
 					<mat-label>Enter your password</mat-label>
-					<input type="password" matInput required />
+					<input type="password" matInput required formControlName="password"/>
 				</mat-form-field>
-				<button mat-raised-button color="accent">Login</button>
+				<button type="submit" [disabled]="loginGroup.invalid" mat-raised-button color="accent">Login</button>
 			</form>
 		</mat-tab>
 		<mat-tab label="Register">
-			<form>
-				<mat-form-field *ngIf="role === 'employer'" appearance="fill">
+			<form [formGroup]="registerGroup" (submit)="register()" novalidate>
+				<mat-form-field *ngIf="role" appearance="fill">
 					<mat-label>Enter company name</mat-label>
-					<input matInput required />
+					<input matInput required formControlName="company_name"/>
 				</mat-form-field>
 				<mat-form-field appearance="fill">
 					<mat-label>Enter your email</mat-label>
-					<input matInput required />
+					<input matInput required formControlName="email"/>
 				</mat-form-field>
 				<mat-form-field appearance="fill">
 					<mat-label>Enter your password</mat-label>
-					<input type="password" matInput required />
+					<input type="password" matInput required formControlName="password"/>
 				</mat-form-field>
-				<button mat-raised-button color="accent">Register</button>
+				<mat-form-field appearance="fill">
+					<mat-label>Repeat your password</mat-label>
+					<input type="password" matInput required formControlName="repeatPassword"/>
+				</mat-form-field>
+				<button type="submit" [disabled]="registerGroup.invalid" mat-raised-button color="accent">
+					Register
+				</button>
 			</form>
 		</mat-tab>
 	</mat-tab-group>
