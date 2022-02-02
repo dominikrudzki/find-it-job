@@ -1,8 +1,20 @@
-import { createAction, props } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store'
 
-export const setLogin = createAction(
+export const setIsLogged = createAction(
 	'[User Info] Set isLogged',
-	props<{ logged: boolean }>()
-);
+	props<{ isLogged: boolean }>()
+)
 
-export const getIsLogged = createAction('[User Info] Get isLogged');
+export const setIsEmployer = createAction(
+	'[User Info] Set isEmployer',
+	props<{ isEmployer: boolean }>()
+)
+
+export const setEmail = createAction(
+	'[User Info] Set email',
+	props<{ email: string }>()
+)
+
+export const resetUserInfo = createAction(
+	'[User Info] Reset UserInfo'
+)

@@ -1,16 +1,17 @@
-import {createReducer, on} from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store'
+import { resetUserInfo, setEmail, setIsEmployer, setIsLogged } from './userInfo.actions'
+import { UserInfo } from '../../interfaces/user-info'
 
-import {setLogin, getIsLogged} from './userInfo.actions';
-import {userInfo} from '../../interfaces/userInfo.interface';
-
-export const initialLoginState: userInfo = {
+export const initialState: UserInfo = {
 	isLogged: false,
-	accountType: undefined,
-	userInfo: undefined,
-};
+	isEmployer: undefined,
+	userEmail: undefined
+}
 
 export const userInfoReducer = createReducer(
-	initialLoginState.isLogged,
-	on(setLogin, (state, {logged}) => state), //TODO: add changing state
-	on(getIsLogged, (state) => state)
-);
+	initialState,
+	on(setIsLogged, (state, {isLogged}) => ({...state, isLogged})),
+	on(setIsEmployer, (state, {isEmployer}) => ({...state, isEmployer})),
+	on(setEmail, (state, {email}) => ({...state, userEmail: email})),
+	on(resetUserInfo, () => initialState)
+)
