@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {JobDetails} from "../../core/interfaces/jobDetails.interface";
+import { Component, Input, OnInit } from '@angular/core'
+import { JobDetails } from "../../core/interfaces/job-details"
+import { environment } from "../../../environments/environment"
 
 @Component({
 	selector: 'app-job',
@@ -7,7 +8,8 @@ import {JobDetails} from "../../core/interfaces/jobDetails.interface";
 	styleUrls: ['./job.component.scss']
 })
 export class JobComponent implements OnInit {
-	@Input() job?: JobDetails;
+	@Input() job?: JobDetails
+	jobImageUrl = environment.imageUrl
 
 	constructor() {
 	}
