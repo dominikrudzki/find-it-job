@@ -9,9 +9,9 @@
 			class="dark-mode"
 			(click)="toggleTheme()"
 		>
-			<mat-icon>{{
-				darkTheme.value ? "bedtime" : "brightness_5"
-			}}</mat-icon>
+			<mat-icon>
+				{{darkTheme.value ? "bedtime" : "brightness_5"}}
+			</mat-icon>
 		</button>
 		<span class="spacer"></span>
 		<div class="nav" [class.hidden]="isOpen">
@@ -19,41 +19,40 @@
 				<mat-list-item role="listitem">
 					<a mat-button routerLink="/">Jobs</a>
 				</mat-list-item>
-				<mat-list-item role="listitem">
-					<a mat-button disabled routerLink="/">IT Stats</a>
+				<mat-list-item role="listitem" *ngIf="($isLogged | async) && ($isEmployer | async) === false">
+					<a mat-button routerLink="/">Matchmaking</a>
+				</mat-list-item>
+				<mat-list-item role="listitem" *ngIf="($isLogged | async) && ($isEmployer | async)">
+					<a mat-button routerLink="/post-job">Post a job</a>
 				</mat-list-item>
 				<mat-list-item role="listitem">
 					<a
 						mat-raised-button
 						[matMenuTriggerFor]="menu"
 						color="accent"
-						routerLink="matches"
-						>{{ ($isLogged | async) ? "Profile" : "Login" }}
+					>{{ ($isLogged | async) ? "Profile" : "Sign in" }}
 						<mat-icon>expand_more</mat-icon>
 					</a>
 					<mat-menu #menu="matMenu" [ngSwitch]="$isLogged | async">
 						<button
 							mat-menu-item
 							*ngSwitchCase="false"
-							(click)="openDialog('developer')"
+							(click)="openDialog(false)"
 						>
-							Login as developer
+							as developer
 						</button>
 						<button
 							mat-menu-item
 							*ngSwitchCase="false"
-							(click)="openDialog('employer')"
+							(click)="openDialog(true)"
 						>
-							Login as employer
+							as employer
 						</button>
 
-						<button mat-menu-item *ngSwitchCase="true">
+						<button mat-menu-item *ngSwitchCase="true" routerLink="settings">
 							Settings
 						</button>
-						<button mat-menu-item *ngSwitchCase="true">
-							Matchmaking
-						</button>
-						<button mat-menu-item *ngSwitchCase="true">
+						<button mat-menu-item *ngSwitchCase="true" (click)="logout()">
 							Logout
 						</button>
 					</mat-menu>
