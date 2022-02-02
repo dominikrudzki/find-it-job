@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {JobDetails} from "../core/interfaces/jobDetails.interface";
-import {JobDataService} from '../core/services/job-data.service';
-import {ActivatedRoute} from "@angular/router";
+import { Component, OnInit } from '@angular/core'
+import { JobDetails } from "../core/interfaces/job-details"
+import { JobDataService } from '../core/services/job-data.service'
+import { ActivatedRoute } from "@angular/router"
+import { environment } from "../../environments/environment"
 
 @Component({
 	selector: 'app-job-preview',
@@ -10,10 +11,11 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class JobPreviewComponent implements OnInit {
 	job?: JobDetails
+	jobImageUrl = environment.imageUrl
 
 	jobDataSub = this.jobData.getJob(Number(this.route.snapshot.paramMap.get('jobId'))).subscribe(val => {
 		this.job = val
-	});
+	})
 
 	constructor(private jobData: JobDataService, private route: ActivatedRoute) {
 	}
@@ -26,6 +28,6 @@ export class JobPreviewComponent implements OnInit {
 	}
 
 	ngOnDestroy() {
-		this.jobDataSub.unsubscribe();
+		this.jobDataSub.unsubscribe()
 	}
 }
