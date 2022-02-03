@@ -6,8 +6,7 @@
 					(change)="categoryHandle($event)"
 					class="example-margin"
 					[id]="category"
-					>{{ category }}</mat-checkbox
-				>
+				>{{ category }}</mat-checkbox>
 			</label>
 		</mat-card>
 	</div>
@@ -17,7 +16,7 @@
 		(closed)="panelOpenState = false"
 	>
 		<mat-expansion-panel-header>
-			<mat-panel-title> More filters </mat-panel-title>
+			<mat-panel-title> More filters</mat-panel-title>
 		</mat-expansion-panel-header>
 
 		<p>Remote:</p>
@@ -50,7 +49,7 @@
 		></mat-slider>
 	</mat-expansion-panel>
 
-	<mat-card *ngIf="showPreferences">
+	<!-- <mat-card *ngIf="showPreferences">
 		<mat-card-subtitle> You are searching for: </mat-card-subtitle>
 		<mat-card-content>
 			<span class="remote" *ngIf="preferences.value.remote != null">
@@ -71,5 +70,5 @@
 				</span>
 			</span>
 		</mat-card-content>
-	</mat-card>
+	</mat-card> -->
 </section>
