@@ -7,6 +7,27 @@ body {
 	font-family: Roboto, "Helvetica Neue", sans-serif;
 	transition: background-color 0.3s;
 
+
+	.mat-menu-content,
+	.mat-select-panel,
+	.mat-autocomplete-panel {
+		background-color: #6b6a6a;
+
+		button {
+			color: #fff;
+
+			.mat-icon {
+				color: #fff;
+			}
+		}
+	}
+
+	mat-list-item .mat-list-item-content {
+		display: flex;
+		flex-direction: row-reverse !important;
+		justify-content: flex-end !important;
+	}
+
 	.mat-button-disabled span {
 		color: #a5a5a5;
 	}
