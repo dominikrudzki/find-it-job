@@ -19,4 +19,13 @@ export class JobDataService {
 	getJobs(): Observable<Array<JobDetails>> {
 		return this.http.get<any>(`${environment.apiUrl}/get-jobs`)
 	}
+
+	addJob() {
+		return this.http.put(
+			`${environment.apiUrl}/add-job`,
+			{},
+			{}
+			// TODO add job request
+		)
+	}
 }
