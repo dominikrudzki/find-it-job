@@ -5,7 +5,8 @@
 export const environment = {
 	production: false,
 	apiUrl: 'http://localhost:3000/api/v1',
-	imageUrl: 'http://localhost:3000/company_logos/'
+	imageUrl: 'http://localhost:3000/company_logos/',
+	technologies: ['C++', 'C#', 'JavaScript', 'PHP', 'Java', 'Python', '.Net', 'Ruby', 'Angular', 'React']
 }
 
 /*
