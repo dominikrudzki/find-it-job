@@ -1,0 +1,79 @@
+.wrapper {
+	padding: 15px;
+
+	form {
+		mat-form-field {
+			display: block;
+		}
+
+		mat-radio-group {
+			display: block;
+		}
+
+		mat-radio-button {
+			margin-top: 10px;
+			margin-right: 15px;
+		}
+
+		.experience {
+			padding-bottom: 1.34375em;
+		}
+
+		.salary {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+
+			mat-form-field {
+				width: 44%;
+
+				.right-align {
+					text-align: right;
+				}
+			}
+
+
+		}
+
+		.skills {
+			& > div {
+				display: flex;
+
+				mat-form-field:nth-child(1) {
+					width: 55%;
+				}
+
+				mat-form-field:nth-child(3) {
+					width: 25%;
+				}
+
+				button {
+					width: 20%;
+					margin-bottom: 1.34375em;
+				}
+			}
+
+			.skill {
+			}
+
+			span {
+				margin: 0 10px;
+			}
+
+			mat-icon {
+				cursor: pointer;
+				margin-left: auto;
+			}
+		}
+
+		& > button {
+			display: block;
+			width: 100%;
+			margin: 15px auto 0 auto;
+		}
+	}
+}
+
+mat-icon {
+	color: #fff;
+}

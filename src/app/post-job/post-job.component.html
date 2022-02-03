@@ -1,1 +1,140 @@
-<p>post-job works!</p>
+<div class="wrapper">
+	<app-back-button></app-back-button>
+
+	<mat-card>
+		<mat-card-header>
+			<mat-card-title>
+				Add job:
+			</mat-card-title>
+		</mat-card-header>
+		<mat-card-content>
+			<form novalidate>
+				<mat-form-field appearance="fill">
+					<mat-label>Title</mat-label>
+					<input matInput autocomplete="off">
+				</mat-form-field>
+
+				<div class="experience">
+					<mat-label>Experience:</mat-label>
+					<mat-radio-group aria-label="Select an option">
+						<mat-radio-button value="Junior">Junior</mat-radio-button>
+						<mat-radio-button value="Mid">Mid</mat-radio-button>
+						<mat-radio-button value="Senior">Senior</mat-radio-button>
+					</mat-radio-group>
+				</div>
+
+				<div class="experience">
+					<mat-label>Remote:</mat-label>
+					<mat-radio-group aria-label="Select an option">
+						<mat-radio-button value="1">Yes</mat-radio-button>
+						<mat-radio-button value="2">No</mat-radio-button>
+					</mat-radio-group>
+				</div>
+
+				<div class="salary">
+					<mat-form-field appearance="fill" floatLabel="always">
+						<mat-label>Salary-min</mat-label>
+						<input type="number" matInput maxlength="5" autocomplete="off" class="right-align">
+						<span matPrefix>$&nbsp;</span>
+					</mat-form-field>
+					<mat-icon>remove</mat-icon>
+					<mat-form-field appearance="fill" floatLabel="always">
+						<mat-label>Salary-max</mat-label>
+						<input type="number" matInput maxlength="5" autocomplete="off" class="right-align">
+						<span matPrefix>$&nbsp;</span>
+					</mat-form-field>
+				</div>
+
+				<mat-form-field class="example-full-width" appearance="fill">
+					<mat-label>Description</mat-label>
+					<textarea matInput></textarea>
+				</mat-form-field>
+
+				<mat-form-field class="example-chip-list" appearance="fill">
+					<mat-label>Benefits</mat-label>
+					<mat-chip-list #chipList aria-label="Fruit selection">
+						<mat-chip
+							color="accent" selected
+							*ngFor="let benefit of benefits"
+							(removed)="remove(benefits, benefit)"
+						>
+							{{benefit.name}}
+							<button matChipRemove>
+								<mat-icon>cancel</mat-icon>
+							</button>
+						</mat-chip>
+						<input
+							[matChipInputFor]="chipList"
+							[matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+							[matChipInputAddOnBlur]="true"
+							(matChipInputTokenEnd)="addBenefit($event)"
+							placeholder="confirm with enter"
+						>
+					</mat-chip-list>
+				</mat-form-field>
+
+				<mat-card>
+					<div class="skills">
+						<div>
+							<mat-form-field class="example-full-width" appearance="fill">
+								<mat-label>Skill</mat-label>
+								<input
+									type="text"
+									aria-label="Number"
+									matInput
+									maxlength="18"
+									#skill
+									[formControl]="myControl"
+									[matAutocomplete]="auto"
+								>
+								<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+									<mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+										{{option}}
+									</mat-option>
+								</mat-autocomplete>
+							</mat-form-field>
+							<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+								<mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+									{{option}}
+								</mat-option>
+							</mat-autocomplete>
+							<mat-form-field appearance="fill">
+								<mat-label>Exp</mat-label>
+								<mat-select [(ngModel)]="selectOption" name="exp">
+									<mat-option value="1">1</mat-option>
+									<mat-option value="2">2</mat-option>
+									<mat-option value="3">3</mat-option>
+									<mat-option value="4">4</mat-option>
+									<mat-option value="5">5</mat-option>
+								</mat-select>
+							</mat-form-field>
+							<button
+								type="button"
+								mat-raised-button
+								color="accent"
+								(click)="addSkill(skill.value, selectOption) "
+							>
+								<mat-icon>add</mat-icon>
+							</button>
+						</div>
+
+						<mat-list>
+							<ng-container *ngFor="let skill of skills">
+								<mat-list-item class="skill">
+									<mat-icon class="active" (click)="remove(skills, skill)">cancel</mat-icon>
+									<span>{{skill.name}} [{{skill.level}}/5]</span>
+								</mat-list-item>
+								<mat-divider></mat-divider>
+							</ng-container>
+						</mat-list>
+					</div>
+				</mat-card>
+
+				<button type="button" mat-raised-button color="accent">
+					<mat-icon>add</mat-icon>
+					Post a job
+				</button>
+			</form>
+		</mat-card-content>
+	</mat-card>
+</div>
