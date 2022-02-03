@@ -1,0 +1,27 @@
+.wrapper {
+	padding: 15px;
+	position: relative;
+
+	.back-btn {
+		display: block;
+		width: fit-content;
+		margin-bottom: 15px;
+	}
+
+	table {
+		width: 100%;
+		background-color: #504c4c;
+		border-radius: 15px;
+
+		td, th {
+			color: #fff
+		}
+
+		.mat-column-options {
+			text-align: center;
+			width: 40px;
+		}
+	}
+}
+
+
