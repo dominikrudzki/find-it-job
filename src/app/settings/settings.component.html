@@ -4,25 +4,21 @@
 			<h3>Account settings:</h3>
 		</mat-card-header>
 		<mat-card-content>
-			<a mat-raised-button color="primary">Change password</a>
-			<a mat-raised-button color="primary">See my applications</a>
+			<a mat-raised-button color="accent" routerLink="change-password">Change password</a>
+			<a mat-raised-button color="accent" routerLink="my-applications">See my applications</a>
 		</mat-card-content>
 	</mat-card>
 
 	<mat-card>
 		<mat-card-header>
-
 			<div mat-card-avatar class="example-header-image">
-				<img
-					loading="lazy"
-					alt="logo"
-				/>
+				<img loading="lazy" alt="logo"/>
 			</div>
 			<mat-card-title><h3>{{'{company_name}'}}</h3></mat-card-title>
 		</mat-card-header>
 		<mat-card-content>
-			<a mat-raised-button color="primary">Change company image</a>
-			<a mat-raised-button color="primary">Manage jobs</a>
+			<a mat-raised-button color="accent" routerLink="change-company-image">Change company image</a>
+			<a mat-raised-button color="accent" routerLink="manage-jobs">Manage jobs</a>
 		</mat-card-content>
 	</mat-card>
 </div>
