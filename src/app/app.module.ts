@@ -35,10 +35,21 @@ import { MatTabsModule } from '@angular/material/tabs'
 import { MatInputModule } from '@angular/material/input'
 import { MatSliderModule } from '@angular/material/slider'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatTableModule } from '@angular/material/table'
+
 
 import { CurrencyPipe } from './core/pipes/currency.pipe'
 import { HttpClientModule } from "@angular/common/http"
-import { ReactiveFormsModule } from "@angular/forms"
+import { FormsModule, ReactiveFormsModule } from "@angular/forms"
+import { ManageJobsComponent } from './settings/manage-jobs/manage-jobs.component'
+import { UserApplicationsComponent } from './settings/user-applications/user-applications.component'
+import { ChangePasswordComponent } from './settings/change-password/change-password.component'
+import { BackButtonComponent } from './shared/components/back-button/back-button.component'
+import { ChangeCompanyImageComponent } from './settings/change-company-image/change-company-image.component'
+import { MatChipsModule } from "@angular/material/chips"
+import { MatDividerModule } from '@angular/material/divider'
+import { MatSelectModule } from "@angular/material/select"
+import { MatAutocompleteModule } from "@angular/material/autocomplete"
 
 const materialModules = [
 	MatToolbarModule,
@@ -56,7 +67,9 @@ const materialModules = [
 	MatTabsModule,
 	MatInputModule,
 	MatSliderModule,
-	MatSnackBarModule
+	MatSnackBarModule,
+	MatTableModule,
+	MatDividerModule
 ]
 
 @NgModule({
@@ -71,7 +84,12 @@ const materialModules = [
 		JobPreviewComponent,
 		CurrencyPipe,
 		PostJobComponent,
-		SettingsComponent
+		SettingsComponent,
+		ManageJobsComponent,
+		UserApplicationsComponent,
+		ChangePasswordComponent,
+		BackButtonComponent,
+		ChangeCompanyImageComponent
 	],
 	imports: [
 		BrowserModule,
@@ -84,7 +102,11 @@ const materialModules = [
 			userInfo: userInfoReducer,
 			filterPreferences: filterPreferencesReducer,
 			jobList: jobListReducer
-		})
+		}),
+		MatChipsModule,
+		MatSelectModule,
+		MatAutocompleteModule,
+		FormsModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
