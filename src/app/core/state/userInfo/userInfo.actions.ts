@@ -15,6 +15,11 @@ export const setEmail = createAction(
 	props<{ email: string }>()
 )
 
+export const setCompanyName = createAction(
+	'[User Info] Set companyName',
+	props<{ companyName: string }>()
+)
+
 export const resetUserInfo = createAction(
 	'[User Info] Reset UserInfo'
 )

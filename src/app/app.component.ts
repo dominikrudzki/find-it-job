@@ -2,7 +2,12 @@ import { Component } from '@angular/core'
 import { LocalStorageService } from './core/services/local-storage.service'
 import { Store } from "@ngrx/store"
 import { UserInfo } from "./core/interfaces/user-info"
-import { setEmail, setIsEmployer, setIsLogged } from "./core/state/userInfo/userInfo.actions"
+import {
+	setCompanyName,
+	setEmail,
+	setIsEmployer,
+	setIsLogged
+} from "./core/state/userInfo/userInfo.actions"
 import { AuthService } from './core/services/auth.service'
 
 
@@ -31,6 +36,10 @@ export class AppComponent {
 
 			this.store.dispatch(setIsEmployer({
 				isEmployer: jwtPayload?.employer!
+			}))
+
+			this.store.dispatch(setCompanyName({
+				companyName: jwtPayload?.companyName!
 			}))
 		}
 	}
