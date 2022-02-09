@@ -25,7 +25,6 @@ export class JobDataService {
 	}
 
 	getEmployerJobs() {
-		console.log(this.localStorageService.getItem('access-token'))
 		return this.http.get<any>(
 			`${environment.apiUrl}/get-company-jobs`,
 			{
