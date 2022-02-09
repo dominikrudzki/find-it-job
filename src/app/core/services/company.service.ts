@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { environment } from "../../../environments/environment"
 import { LocalStorageService } from "./local-storage.service"
 import { Observable } from "rxjs"
+import { JobApplication } from "../interfaces/job-application"
 
 @Injectable({
 	providedIn: 'root'
@@ -30,6 +31,14 @@ export class CompanyService {
 		)
 	}
 
-	deleteJob(id: number) {
+	getJobApplications(jobId: number): Observable<Array<JobApplication>> {
+		return this.http.get<Array<JobApplication>>(
+			`${environment.apiUrl}/get-job-applications/${jobId}`,
+			{
+				headers: new HttpHeaders(
+					{'Authorization': 'Bearer ' + this.localStorageService.getItem('access-token')}
+				)
+			}
+		)
 	}
 }
