@@ -7,16 +7,25 @@
 				Add job:
 			</mat-card-title>
 		</mat-card-header>
+
 		<mat-card-content>
-			<form novalidate>
+			<form [formGroup]="addJobForm" novalidate>
 				<mat-form-field appearance="fill">
 					<mat-label>Title</mat-label>
-					<input matInput autocomplete="off">
+					<input
+						matInput
+						autocomplete="off"
+						formControlName="name"
+						maxlength="32"
+					>
 				</mat-form-field>
 
 				<div class="experience">
 					<mat-label>Experience:</mat-label>
-					<mat-radio-group aria-label="Select an option">
+					<mat-radio-group
+						aria-label="Select an option"
+						formControlName="experience"
+					>
 						<mat-radio-button value="Junior">Junior</mat-radio-button>
 						<mat-radio-button value="Mid">Mid</mat-radio-button>
 						<mat-radio-button value="Senior">Senior</mat-radio-button>
@@ -25,32 +34,52 @@
 
 				<div class="experience">
 					<mat-label>Remote:</mat-label>
-					<mat-radio-group aria-label="Select an option">
-						<mat-radio-button value="1">Yes</mat-radio-button>
-						<mat-radio-button value="2">No</mat-radio-button>
+					<mat-radio-group
+						aria-label="Select an option"
+						formControlName="remote"
+					>
+						<mat-radio-button value="true">Yes</mat-radio-button>
+						<mat-radio-button value="false">No</mat-radio-button>
 					</mat-radio-group>
 				</div>
 
 				<div class="salary">
 					<mat-form-field appearance="fill" floatLabel="always">
 						<mat-label>Salary-min</mat-label>
-						<input type="number" matInput maxlength="5" autocomplete="off" class="right-align">
+						<input
+							type="number"
+							matInput
+							maxlength="5"
+							autocomplete="off"
+							class="right-align"
+							formControlName="salaryMin"
+						>
 						<span matPrefix>$&nbsp;</span>
 					</mat-form-field>
 					<mat-icon>remove</mat-icon>
 					<mat-form-field appearance="fill" floatLabel="always">
 						<mat-label>Salary-max</mat-label>
-						<input type="number" matInput maxlength="5" autocomplete="off" class="right-align">
+						<input
+							type="number"
+							matInput
+							maxlength="5"
+							autocomplete="off"
+							class="right-align"
+							formControlName="salaryMax"
+						>
 						<span matPrefix>$&nbsp;</span>
 					</mat-form-field>
 				</div>
 
 				<mat-form-field class="example-full-width" appearance="fill">
 					<mat-label>Description</mat-label>
-					<textarea matInput></textarea>
+					<textarea
+						matInput
+						formControlName="description"
+					></textarea>
 				</mat-form-field>
 
-				<mat-form-field class="example-chip-list" appearance="fill">
+				<mat-form-field class="example-chip-list" floatLabel="always" appearance="fill">
 					<mat-label>Benefits</mat-label>
 					<mat-chip-list #chipList aria-label="Fruit selection">
 						<mat-chip
@@ -58,7 +87,7 @@
 							*ngFor="let benefit of benefits"
 							(removed)="remove(benefits, benefit)"
 						>
-							{{benefit.name}}
+							{{benefit}}
 							<button matChipRemove>
 								<mat-icon>cancel</mat-icon>
 							</button>
@@ -100,7 +129,7 @@
 							</mat-autocomplete>
 							<mat-form-field appearance="fill">
 								<mat-label>Exp</mat-label>
-								<mat-select [(ngModel)]="selectOption" name="exp">
+								<mat-select name="exp" [(value)]="selectOption" #exp>
 									<mat-option value="1">1</mat-option>
 									<mat-option value="2">2</mat-option>
 									<mat-option value="3">3</mat-option>
@@ -112,7 +141,7 @@
 								type="button"
 								mat-raised-button
 								color="accent"
-								(click)="addSkill(skill.value, selectOption) "
+								(click)="addSkill(skill.value, exp.value)"
 							>
 								<mat-icon>add</mat-icon>
 							</button>
@@ -130,7 +159,7 @@
 					</div>
 				</mat-card>
 
-				<button type="button" mat-raised-button color="accent">
+				<button type="button" mat-raised-button color="accent" (click)="submitFrom()">
 					<mat-icon>add</mat-icon>
 					Post a job
 				</button>
