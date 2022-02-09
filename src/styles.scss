@@ -7,6 +7,9 @@ body {
 	font-family: Roboto, "Helvetica Neue", sans-serif;
 	transition: background-color 0.3s;
 
+	.mat-card-avatar {
+		border-radius: 0;
+	}
 
 	.mat-menu-content,
 	.mat-select-panel,
