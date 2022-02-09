@@ -48,6 +48,7 @@ export class NavComponent implements OnInit {
 	logout() {
 		this.localStorageService.removeItem('accessToken')
 		this.localStorageService.removeItem('refreshToken')
+		this.localStorageService.removeItem('c_img')
 		this.store.dispatch(resetUserInfo())
 	}
 }
