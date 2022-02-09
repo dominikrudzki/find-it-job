@@ -9,6 +9,7 @@ import { ManageJobsComponent } from "./settings/manage-jobs/manage-jobs.componen
 import { UserApplicationsComponent } from "./settings/user-applications/user-applications.component"
 import { ChangePasswordComponent } from "./settings/change-password/change-password.component"
 import { ChangeCompanyImageComponent } from "./settings/change-company-image/change-company-image.component"
+import { IsEmployerGuard } from "./core/guards/is-employer.guard"
 
 const routes: Routes = [
 	{
@@ -42,11 +43,13 @@ const routes: Routes = [
 			},
 			{
 				path: 'change-company-image',
-				component: ChangeCompanyImageComponent
+				component: ChangeCompanyImageComponent,
+				canActivate: [IsEmployerGuard]
 			},
 			{
 				path: 'manage-jobs',
-				component: ManageJobsComponent
+				component: ManageJobsComponent,
+				canActivate: [IsEmployerGuard]
 			}
 		]
 	},
