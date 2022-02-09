@@ -20,6 +20,11 @@ export const setCompanyName = createAction(
 	props<{ companyName: string }>()
 )
 
+export const setCompanyImage = createAction(
+	'[User Info] Set companyImage',
+	props<{ companyImage: string }>()
+)
+
 export const resetUserInfo = createAction(
 	'[User Info] Reset UserInfo'
 )

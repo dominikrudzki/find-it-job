@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store'
 import {
 	resetUserInfo,
+	setCompanyImage,
 	setCompanyName,
 	setEmail,
 	setIsEmployer,
@@ -22,5 +23,6 @@ export const userInfoReducer = createReducer(
 	on(setIsEmployer, (state, {isEmployer}) => ({...state, isEmployer})),
 	on(setEmail, (state, {email}) => ({...state, userEmail: email})),
 	on(setCompanyName, (state, {companyName}) => ({...state, companyName})),
+	on(setCompanyImage, (state, {companyImage}) => ({...state, companyImage})),
 	on(resetUserInfo, () => initialState)
 )
