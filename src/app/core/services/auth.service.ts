@@ -35,12 +35,16 @@ export class AuthService {
 		)
 	}
 
-	decodeAccessToken(token: string): jwtPayload | null {
-		try {
-			return jwt_decode(token)
-		} catch (err) {
-			return null
-		}
+	changePassword(password: string, newPassword: string): Observable<any> {
+		return this.http.patch(
+			`${environment.apiUrl}/change-password`,
+			{password, newPassword},
+			{
+				headers: new HttpHeaders(
+					{'Authorization': 'Bearer ' + this.localStorageService.getItem('access-token')}
+				)
+			}
+		)
 	}
 
 	refreshToken(): Observable<any> {
@@ -53,5 +57,13 @@ export class AuthService {
 				)
 			}
 		)
+	}
+
+	decodeAccessToken(token: string): jwtPayload | null {
+		try {
+			return jwt_decode(token)
+		} catch (err) {
+			return null
+		}
 	}
 }
