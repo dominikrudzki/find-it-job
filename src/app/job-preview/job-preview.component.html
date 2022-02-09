@@ -37,15 +37,6 @@
 				</ul>
 			</div>
 
-			<div *ngIf="job.requirements">
-				<h3>Requirements</h3>
-				<ul>
-					<li *ngFor="let requirement of job.requirements">
-						<span>{{requirement}}</span>
-					</li>
-				</ul>
-			</div>
-
 			<div class="skills" *ngIf="job.skills">
 				<h3>Skills</h3>
 				<div class="skill" *ngFor="let skill of job.skills">
