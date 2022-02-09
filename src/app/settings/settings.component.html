@@ -1,7 +1,7 @@
 <div class="settings">
 	<mat-card>
 		<mat-card-header>
-			<h3>Account settings:</h3>
+			<mat-card-subtitle>Account settings:</mat-card-subtitle>
 		</mat-card-header>
 		<mat-card-content>
 			<a mat-raised-button color="accent" routerLink="change-password">Change password</a>
@@ -11,10 +11,13 @@
 
 	<mat-card>
 		<mat-card-header>
-			<div mat-card-avatar class="example-header-image">
-				<img loading="lazy" alt="logo"/>
-			</div>
-			<mat-card-title><h3>{{'{company_name}'}}</h3></mat-card-title>
+			<div
+				*ngIf="$companyName | async"
+				mat-card-avatar
+				class="company-logo"
+				[ngStyle]="{'background-image': 'url(' + ($companyImage | async) + ')'}"
+			></div>
+			<mat-card-title>{{$companyName | async}}</mat-card-title>
 		</mat-card-header>
 		<mat-card-content>
 			<a mat-raised-button color="accent" routerLink="change-company-image">Change company image</a>
