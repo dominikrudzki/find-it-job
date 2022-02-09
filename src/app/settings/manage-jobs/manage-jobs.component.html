@@ -25,13 +25,13 @@
 					<mat-icon>more_vert</mat-icon>
 				</button>
 				<mat-menu #menu="matMenu" class="matMenu">
+					<button mat-menu-item (click)="showApplications(element.id)">
+						<mat-icon>description</mat-icon>
+						<span>Show applications</span>
+					</button>
 					<button mat-menu-item routerLink="/job-offers/{{element.id}}">
 						<mat-icon>preview</mat-icon>
 						<span>Preview</span>
-					</button>
-					<button mat-menu-item>
-						<mat-icon>description</mat-icon>
-						<span>Show applications</span>
 					</button>
 					<button mat-menu-item (click)="deleteJob(element.id)">
 						<mat-icon>delete</mat-icon>

@@ -3,6 +3,7 @@ import { JobDataService } from "../../core/services/job-data.service"
 import { MatDialog } from "@angular/material/dialog"
 import { ConfirmDialogComponent } from "../../shared/dialogs/confirm-dialog/confirm-dialog.component"
 import { SnackbarService } from "../../core/services/snackbar.service"
+import { ApplicationsComponent } from "../../shared/dialogs/applications/applications.component"
 
 interface Job {
 	id: number,
@@ -29,13 +30,21 @@ export class ManageJobsComponent implements OnInit {
 	ngOnInit(): void {
 		this.jobDataService.getEmployerJobs().subscribe({
 			next: (val) => {
-				console.log(val)
 				this.jobList = val
 			},
-			error: err => {
-				console.log(err)
+			error: () => {
+				this.snackbarService.open('Unable to load jobs')
 			}
 		})
+	}
+
+	showApplications(jobId: number): void {
+		this.dialog.open(
+			ApplicationsComponent,
+			{
+				restoreFocus: false,
+				data: {jobId}
+			})
 	}
 
 	deleteJob(id: number): void {
