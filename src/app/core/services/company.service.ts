@@ -24,7 +24,7 @@ export class CompanyService {
 			formData,
 			{
 				headers: new HttpHeaders(
-					{'Authorization': 'Bearer ' + this.localStorageService.getItem('accessToken')}
+					{'Authorization': 'Bearer ' + this.localStorageService.getItem('access-token')}
 				)
 			}
 		)
