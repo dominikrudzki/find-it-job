@@ -10,6 +10,7 @@ import { environment } from "../../environments/environment"
 	styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
+	$employer: Observable<boolean> = this.store.select((state) => state.userInfo.isEmployer)
 	$companyName: Observable<string | undefined> = this.store.select((state) => state.userInfo.companyName)
 	$companyImage: Observable<string | undefined> = this.store.select((state) => environment.imageUrl + state.userInfo.companyImage)
 

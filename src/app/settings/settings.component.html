@@ -9,7 +9,7 @@
 		</mat-card-content>
 	</mat-card>
 
-	<mat-card>
+	<mat-card *ngIf="$employer | async">
 		<mat-card-header>
 			<div
 				*ngIf="$companyName | async"
