@@ -7,6 +7,7 @@ import { UserInfo } from "../../../core/interfaces/user-info"
 import { resetUserInfo } from "../../../core/state/userInfo/userInfo.actions"
 import { LocalStorageService } from "../../../core/services/local-storage.service"
 import { Router } from '@angular/router'
+import { ConfirmDialogComponent } from "../../dialogs/confirm-dialog/confirm-dialog.component"
 
 @Component({
 	selector: 'app-nav',
@@ -17,7 +18,7 @@ export class NavComponent implements OnInit {
 	$isLogged: Observable<boolean> = this.store.select((state) => state.userInfo.isLogged)
 	$isEmployer: Observable<boolean | undefined> = this.store.select((state) => state.userInfo.isEmployer)
 	isOpen: boolean = false
-	darkTheme = new BehaviorSubject<boolean>(true)
+	darkTheme = new BehaviorSubject<boolean>(false)
 
 	constructor(
 		private readonly store: Store<{ userInfo: UserInfo }>,
@@ -25,10 +26,26 @@ export class NavComponent implements OnInit {
 		private localStorageService: LocalStorageService,
 		private router: Router
 	) {
-		router.events.subscribe(val => this.isOpen = false)
+		const darkThemeValue = this.localStorageService.getItem('dark-theme') === 'true'
+		
+		router.events.subscribe(() => this.isOpen = false)
+
+		if (darkThemeValue) {
+			this.darkTheme.next(darkThemeValue)
+		}
 	}
 
 	ngOnInit(): void {
+		const body = document.body.classList
+
+		this.darkTheme.subscribe(val => {
+			this.localStorageService.setItem('dark-theme', val.toString())
+			if (val) {
+				body.add('darkTheme')
+			} else {
+				body.remove('darkTheme')
+			}
+		})
 	}
 
 	toggleNav(): void {
@@ -46,9 +63,14 @@ export class NavComponent implements OnInit {
 	}
 
 	logout() {
-		this.localStorageService.removeItem('accessToken')
-		this.localStorageService.removeItem('refreshToken')
-		this.localStorageService.removeItem('c_img')
-		this.store.dispatch(resetUserInfo())
+		const dialogRef = this.dialog.open(ConfirmDialogComponent, {restoreFocus: false})
+		dialogRef.afterClosed().subscribe((res: boolean) => {
+			if (res) {
+				this.localStorageService.removeItem('access-token')
+				this.localStorageService.removeItem('refresh-token')
+				this.localStorageService.removeItem('c_img')
+				this.store.dispatch(resetUserInfo())
+			}
+		})
 	}
 }
