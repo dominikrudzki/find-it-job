@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Applications for this job</h2>
+<mat-dialog-content class="mat-typography">
+
+	<ul>
+		<li *ngFor="let user of userList">
+			{{user.email}}
+		</li>
+	</ul>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+	<button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
