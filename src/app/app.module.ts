@@ -50,6 +50,7 @@ import { MatChipsModule } from "@angular/material/chips"
 import { MatDividerModule } from '@angular/material/divider'
 import { MatSelectModule } from "@angular/material/select"
 import { MatAutocompleteModule } from "@angular/material/autocomplete"
+import { ConfirmDialogComponent } from "./shared/dialogs/confirm-dialog/confirm-dialog.component"
 
 const materialModules = [
 	MatToolbarModule,
@@ -89,7 +90,8 @@ const materialModules = [
 		UserApplicationsComponent,
 		ChangePasswordComponent,
 		BackButtonComponent,
-		ChangeCompanyImageComponent
+		ChangeCompanyImageComponent,
+		ConfirmDialogComponent
 	],
 	imports: [
 		BrowserModule,
