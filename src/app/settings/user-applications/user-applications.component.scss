@@ -7,4 +7,13 @@
 		width: fit-content;
 		margin-bottom: 15px;
 	}
+
+	table {
+		width: 100%;
+
+		.mat-column-options {
+			text-align: center;
+			width: 40px;
+		}
+	}
 }
