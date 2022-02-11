@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { CompanyService } from 'src/app/core/services/company.service'
+import { EmployerService } from 'src/app/core/services/employer.service'
 import { SnackbarService } from "../../core/services/snackbar.service"
 import { Router } from "@angular/router"
 import { Store } from "@ngrx/store"
@@ -18,7 +18,7 @@ export class ChangeCompanyImageComponent implements OnInit {
 	imgSrc?: string | ArrayBuffer | null
 
 	constructor(
-		private companyService: CompanyService,
+		private companyService: EmployerService,
 		private snackbarService: SnackbarService,
 		private router: Router,
 		private store: Store<{ userInfo: UserInfo }>,

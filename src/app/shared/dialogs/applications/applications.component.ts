@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core'
-import { CompanyService } from "../../../core/services/company.service"
+import { EmployerService } from "../../../core/services/employer.service"
 import { MAT_DIALOG_DATA } from "@angular/material/dialog"
 import { SnackbarService } from "../../../core/services/snackbar.service"
 import { JobApplication } from "../../../core/interfaces/job-application"
@@ -14,7 +14,7 @@ export class ApplicationsComponent implements OnInit {
 	userList: Array<JobApplication> = []
 
 	constructor(
-		private companyService: CompanyService,
+		private companyService: EmployerService,
 		@Inject(MAT_DIALOG_DATA) public data: { jobId: number },
 		private snackbarService: SnackbarService
 	) {

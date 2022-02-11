@@ -4,6 +4,7 @@ import { MatDialog } from "@angular/material/dialog"
 import { ConfirmDialogComponent } from "../../shared/dialogs/confirm-dialog/confirm-dialog.component"
 import { SnackbarService } from "../../core/services/snackbar.service"
 import { ApplicationsComponent } from "../../shared/dialogs/applications/applications.component"
+import { AuthService } from 'src/app/core/services/auth.service'
 
 interface Job {
 	id: number,
@@ -23,7 +24,8 @@ export class ManageJobsComponent implements OnInit {
 	constructor(
 		private jobDataService: JobDataService,
 		public dialog: MatDialog,
-		private snackbarService: SnackbarService
+		private snackbarService: SnackbarService,
+		private authService: AuthService
 	) {
 	}
 

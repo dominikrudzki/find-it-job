@@ -14,6 +14,8 @@ import {
 import { Observable } from "rxjs"
 import { UserInfo } from "../../../core/interfaces/user-info"
 import { LocalStorageService } from "../../../core/services/local-storage.service"
+import jwtDecode from "jwt-decode"
+import { jwtPayload } from "../../../core/interfaces/jwt-payload"
 
 @Component({
 	selector: 'app-login-dialog',
@@ -91,11 +93,11 @@ export class LoginDialogComponent implements OnInit {
 					this.loginGroup.reset()
 					this.dialogRef.close()
 
-					const jwtPayload = this.authService.decodeAccessToken(value.accessToken)
+					const jwtPayload: jwtPayload = jwtDecode(value.accessToken)
 
 					this.store.dispatch(setIsLogged({isLogged: true}))
-					this.store.dispatch(setIsEmployer({isEmployer: jwtPayload?.employer!}))
-					this.store.dispatch(setEmail({email: jwtPayload?.email!}))
+					this.store.dispatch(setIsEmployer({isEmployer: jwtPayload.employer!}))
+					this.store.dispatch(setEmail({email: jwtPayload?.email}))
 					this.store.dispatch(setCompanyName({companyName: jwtPayload?.companyName!}))
 					this.store.dispatch(setCompanyImage({companyImage: jwtPayload?.companyImage!}))
 
