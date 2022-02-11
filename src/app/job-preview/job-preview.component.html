@@ -28,7 +28,8 @@
 				<p>{{job.description}}</p>
 			</div>
 
-			<div *ngIf="job.benefits">
+			<div
+				*ngIf="job.benefits && job.benefits.length > 0">
 				<h3>Benefits</h3>
 				<ul>
 					<li *ngFor="let benefit of job.benefits">
@@ -37,7 +38,7 @@
 				</ul>
 			</div>
 
-			<div class="skills" *ngIf="job.skills">
+			<div class="skills" *ngIf="job.skills.length > 0">
 				<h3>Skills</h3>
 				<div class="skill" *ngFor="let skill of job.skills">
 					<mat-icon class="active">done</mat-icon>
