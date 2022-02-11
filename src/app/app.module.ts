@@ -17,7 +17,6 @@ import { SettingsComponent } from './settings/settings.component'
 import { StoreModule } from '@ngrx/store'
 import { userInfoReducer } from './core/state/userInfo/userInfo.reducer'
 import { filterPreferencesReducer } from './core/state/filterPreferences/filterPreferences.reducer'
-import { jobListReducer } from "./core/state/jobList/jobList.reducer"
 
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatIconModule } from '@angular/material/icon'
@@ -104,8 +103,7 @@ const materialModules = [
 		materialModules,
 		StoreModule.forRoot({
 			userInfo: userInfoReducer,
-			filterPreferences: filterPreferencesReducer,
-			jobList: jobListReducer
+			filterPreferences: filterPreferencesReducer
 		}),
 		MatChipsModule,
 		MatSelectModule,
