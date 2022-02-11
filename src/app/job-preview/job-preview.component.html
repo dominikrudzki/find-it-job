@@ -52,7 +52,14 @@
 	</mat-card>
 
 	<div class="apply-btn">
-		<button mat-raised-button color="accent" (click)="apply()">Apply</button>
+		<button
+			mat-raised-button
+			color="accent"
+			(click)="apply()"
+			[disabled]=applied
+		>
+			{{applied ? 'Successfully applied' : 'Apply' }}
+		</button>
 	</div>
 </ng-container>
 
