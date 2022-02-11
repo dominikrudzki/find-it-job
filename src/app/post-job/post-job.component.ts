@@ -85,7 +85,7 @@ export class PostJobComponent implements OnInit {
 		}
 	}
 
-	submitFrom() {
+	submitForm() {
 		if (this.addJobForm.valid) {
 			this.jobDataService.addJob(
 				{
@@ -117,5 +117,4 @@ export class PostJobComponent implements OnInit {
 			this.snackbarService.open('Form is not valid')
 		}
 	}
-
 }

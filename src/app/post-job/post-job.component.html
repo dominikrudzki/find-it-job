@@ -9,7 +9,7 @@
 		</mat-card-header>
 
 		<mat-card-content>
-			<form [formGroup]="addJobForm" novalidate>
+			<form [formGroup]="addJobForm" novalidate (submit)="submitForm()">
 				<mat-form-field appearance="fill">
 					<mat-label>Title</mat-label>
 					<input
@@ -159,7 +159,7 @@
 					</div>
 				</mat-card>
 
-				<button type="button" mat-raised-button color="accent" (click)="submitFrom()">
+				<button type="submit" mat-raised-button color="accent" [disabled]="this.addJobForm.invalid">
 					<mat-icon>add</mat-icon>
 					Post a job
 				</button>

@@ -49,6 +49,12 @@ body {
 			background-color: #424141;
 		}
 
+		table {
+			background-color: #504c4c;
+			border-radius: 15px;
+		}
+
+
 		span,
 		.mat-expansion-indicator::after {
 			border-color: #fff;
@@ -56,6 +62,8 @@ body {
 
 		p,
 		h3,
+		td,
+		th,
 		li,
 		span,
 		mat-label,

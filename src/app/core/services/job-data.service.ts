@@ -20,8 +20,8 @@ export class JobDataService {
 		return this.http.get<JobDetails>(`${environment.apiUrl}/get-job/${id}`)
 	}
 
-	getJobs(): Observable<Array<JobDetails>> {
-		return this.http.get<any>(`${environment.apiUrl}/get-jobs`)
+	getJobs(offset: number = 0): Observable<Array<JobDetails>> {
+		return this.http.get<Array<JobDetails>>(`${environment.apiUrl}/get-jobs/${offset}`)
 	}
 
 	getEmployerJobs() {
