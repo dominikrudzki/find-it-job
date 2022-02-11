@@ -10,6 +10,9 @@ import {
 	setIsLogged
 } from "./core/state/userInfo/userInfo.actions"
 import { AuthService } from './core/services/auth.service'
+import { interval, mergeMap, Subscription } from "rxjs"
+import jwt_decode from "jwt-decode"
+import { jwtPayload } from "./core/interfaces/jwt-payload"
 
 @Component({
 	selector: 'app-root',
@@ -17,53 +20,54 @@ import { AuthService } from './core/services/auth.service'
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+	private tokenSubscription: Subscription = new Subscription()
+
 	constructor(
 		private localStorageService: LocalStorageService,
 		private store: Store<{ userInfo: UserInfo }>,
 		private authService: AuthService
 	) {
 		const accessToken = localStorageService.getItem('access-token')
+		const refreshToken = localStorageService.getItem('refresh-token')
 
 		if (accessToken) {
-			const jwtPayload = this.authService.decodeAccessToken(accessToken)
-
 			this.store.dispatch(setIsLogged({isLogged: true}))
-			this.store.dispatch(setIsEmployer({isEmployer: jwtPayload?.employer!}))
+			this.setDataFromToken(accessToken)
 
-			this.getToken()
-			setInterval(this.getToken, 1000 * 60 * 29) // 29min
+			if (refreshToken) {
+				this.authService.refreshToken().subscribe({
+					next: (val) => {
+						this.setDataFromToken(val.accessToken)
+					}
+				})
+			}
 		}
+
+		this.store.select(state => state.userInfo.isEmployer).subscribe(
+			val => {
+				if (val) {
+					this.tokenSubscription =
+						interval(1000 * 60 * 28).pipe(
+							mergeMap(() => this.authService.refreshToken())
+						).subscribe({
+							next: ({accessToken}) => this.setDataFromToken(accessToken),
+							error: () => this.authService.logout()
+						})
+				} else {
+					this.tokenSubscription.unsubscribe()
+				}
+			}
+		)
 	}
 
-	private getToken() {
-		this.authService.refreshToken().subscribe({
-			next: ({accessToken}) => {
-				const jwtPayload = this.authService.decodeAccessToken(accessToken)
+	setDataFromToken(accessToken: string) {
+		const jwtPayload: jwtPayload = jwt_decode(accessToken)
 
-				this.localStorageService.setItem('access-token', accessToken)
+		this.store.dispatch(setIsEmployer({isEmployer: jwtPayload?.employer!}))
+		this.store.dispatch(setEmail({email: jwtPayload?.email!}))
+		this.store.dispatch(setCompanyName({companyName: jwtPayload?.companyName!}))
+		this.store.dispatch(setCompanyImage({companyImage: jwtPayload?.companyImage!}))
 
-				this.store.dispatch(setEmail({
-					email: jwtPayload?.email!
-				}))
-
-				this.store.dispatch(setIsEmployer({
-					isEmployer: jwtPayload?.employer!
-				}))
-
-				this.store.dispatch(setCompanyName({
-					companyName: jwtPayload?.companyName!
-				}))
-
-				this.store.dispatch(setCompanyImage({
-					companyImage: jwtPayload?.companyImage!
-				}))
-
-			},
-			error: (err) => {
-				console.log(err)
-				this.localStorageService.removeItem('access-token')
-				this.localStorageService.removeItem('refresh-token')
-			}
-		})
+		this.localStorageService.setItem('access-token', accessToken)
 	}
 }
