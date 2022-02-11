@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { Store } from "@ngrx/store"
-import { Observable } from "rxjs"
 import { JobDataService } from "../core/services/job-data.service"
-import { setJobList } from "../core/state/jobList/jobList.actions"
 import { JobDetails } from "../core/interfaces/job-details"
 
 @Component({
@@ -11,23 +8,32 @@ import { JobDetails } from "../core/interfaces/job-details"
 	styleUrls: ['./jobs-page.component.scss']
 })
 export class JobsPageComponent implements OnInit {
+	jobList: Array<JobDetails> = []
+	jobsOffset: number = 0
+	btnVisible: boolean = true
 
-	jobList$: Observable<Array<JobDetails>>
-
-	constructor(private jobData: JobDataService, private store: Store<{ jobList: Array<JobDetails> }>) {
-		this.jobList$ = this.store.select('jobList')
+	constructor(private jobData: JobDataService) {
 	}
 
 	ngOnInit(): void {
 		// TODO: check if array of jobs is empty, if yes send request to get jobs
-		this.jobData.getJobs().subscribe({
-			next: (val) => {
-				this.store.dispatch(setJobList({jobList: val}))
-			}
-		})
+		this.loadJobs()
 	}
 
 	loadMoreJobs() {
 		//	TODO: load few more jobs
+		this.jobsOffset += 5
+		this.loadJobs()
+	}
+
+	loadJobs() {
+		this.jobData.getJobs(this.jobsOffset).subscribe({
+			next: (val) => {
+				this.jobList = this.jobList.concat(val)
+				if (val.length < 5) {
+					this.btnVisible = false
+				}
+			}
+		})
 	}
 }

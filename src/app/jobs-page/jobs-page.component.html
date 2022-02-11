@@ -1,5 +1,11 @@
 <app-filters></app-filters>
 <section class="jobs">
-	<app-job [job]="job" *ngFor="let job of jobList$ | async"></app-job>
-	<button mat-stroked-button (click)="loadMoreJobs()">load more..</button>
+	<app-job [job]="job" *ngFor="let job of jobList"></app-job>
+	<button
+		mat-stroked-button
+		(click)="loadMoreJobs()"
+		*ngIf="btnVisible"
+	>
+		load more..
+	</button>
 </section>
