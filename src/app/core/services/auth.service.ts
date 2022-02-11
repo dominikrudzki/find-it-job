@@ -7,6 +7,9 @@ import { LoginData } from "../interfaces/login-data"
 import jwt_decode from 'jwt-decode'
 import { jwtPayload } from "../interfaces/jwt-payload"
 import { LocalStorageService } from "./local-storage.service"
+import { resetUserInfo } from "../state/userInfo/userInfo.actions"
+import { Store } from "@ngrx/store"
+import { UserInfo } from "../interfaces/user-info"
 
 @Injectable({
 	providedIn: 'root'
@@ -15,7 +18,8 @@ export class AuthService {
 
 	constructor(
 		private http: HttpClient,
-		private localStorageService: LocalStorageService
+		private localStorageService: LocalStorageService,
+		private store: Store<{ userInfo: UserInfo }>
 	) {
 	}
 
@@ -33,6 +37,12 @@ export class AuthService {
 			`${environment.apiUrl}/login`,
 			{email, password}
 		)
+	}
+
+	logout() {
+		this.localStorageService.removeItem('access-token')
+		this.localStorageService.removeItem('refresh-token')
+		this.store.dispatch(resetUserInfo())
 	}
 
 	changePassword(password: string, newPassword: string): Observable<any> {
@@ -57,13 +67,5 @@ export class AuthService {
 				)
 			}
 		)
-	}
-
-	decodeAccessToken(token: string): jwtPayload | null {
-		try {
-			return jwt_decode(token)
-		} catch (err) {
-			return null
-		}
 	}
 }

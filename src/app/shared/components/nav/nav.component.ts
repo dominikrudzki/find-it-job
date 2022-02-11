@@ -8,6 +8,7 @@ import { resetUserInfo } from "../../../core/state/userInfo/userInfo.actions"
 import { LocalStorageService } from "../../../core/services/local-storage.service"
 import { Router } from '@angular/router'
 import { ConfirmDialogComponent } from "../../dialogs/confirm-dialog/confirm-dialog.component"
+import { AuthService } from "../../../core/services/auth.service"
 
 @Component({
 	selector: 'app-nav',
@@ -24,10 +25,11 @@ export class NavComponent implements OnInit {
 		private readonly store: Store<{ userInfo: UserInfo }>,
 		public dialog: MatDialog,
 		private localStorageService: LocalStorageService,
-		private router: Router
+		private router: Router,
+		private authService: AuthService
 	) {
 		const darkThemeValue = this.localStorageService.getItem('dark-theme') === 'true'
-		
+
 		router.events.subscribe(() => this.isOpen = false)
 
 		if (darkThemeValue) {
@@ -66,10 +68,7 @@ export class NavComponent implements OnInit {
 		const dialogRef = this.dialog.open(ConfirmDialogComponent, {restoreFocus: false})
 		dialogRef.afterClosed().subscribe((res: boolean) => {
 			if (res) {
-				this.localStorageService.removeItem('access-token')
-				this.localStorageService.removeItem('refresh-token')
-				this.localStorageService.removeItem('c_img')
-				this.store.dispatch(resetUserInfo())
+				this.authService.logout()
 			}
 		})
 	}
