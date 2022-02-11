@@ -8,7 +8,7 @@ import { JobApplication } from "../interfaces/job-application"
 @Injectable({
 	providedIn: 'root'
 })
-export class CompanyService {
+export class EmployerService {
 
 	constructor(
 		private http: HttpClient,
