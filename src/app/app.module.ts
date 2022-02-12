@@ -16,7 +16,6 @@ import { SettingsComponent } from './settings/settings.component'
 
 import { StoreModule } from '@ngrx/store'
 import { userInfoReducer } from './core/state/userInfo/userInfo.reducer'
-import { filterPreferencesReducer } from './core/state/filterPreferences/filterPreferences.reducer'
 
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatIconModule } from '@angular/material/icon'
@@ -102,8 +101,7 @@ const materialModules = [
 		HttpClientModule,
 		materialModules,
 		StoreModule.forRoot({
-			userInfo: userInfoReducer,
-			filterPreferences: filterPreferencesReducer
+			userInfo: userInfoReducer
 		}),
 		MatChipsModule,
 		MatSelectModule,
