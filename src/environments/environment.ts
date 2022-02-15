@@ -6,7 +6,8 @@ export const environment = {
 	production: false,
 	apiUrl: 'http://localhost:3000/api/v1',
 	imageUrl: 'http://localhost:3000/company_logos/',
-	technologies: ['C++', 'C#', 'JavaScript', 'PHP', 'Java', 'Python', '.Net', 'Ruby', 'Angular', 'React']
+	searchDelay: 2500, //ms
+	skills: ['Angular', 'C', 'C++', 'CSS', 'Go', 'HTML', 'Java', 'JavaScript', 'Node', 'Python', 'React', 'Ruby']
 }
 
 /*
