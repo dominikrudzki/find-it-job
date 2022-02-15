@@ -4,6 +4,7 @@ import { JobDetails } from "../interfaces/job-details"
 import { Observable } from "rxjs"
 import { environment } from "../../../environments/environment"
 import { LocalStorageService } from "./local-storage.service"
+import { Filters } from "../interfaces/filters"
 
 @Injectable({
 	providedIn: 'root'
@@ -20,8 +21,10 @@ export class JobDataService {
 		return this.http.get<JobDetails>(`${environment.apiUrl}/get-job/${id}`)
 	}
 
-	getJobs(offset: number = 0): Observable<Array<JobDetails>> {
-		return this.http.get<Array<JobDetails>>(`${environment.apiUrl}/get-jobs/${offset}`)
+	getJobs(offset: number = 0, params: Filters | undefined): Observable<Array<JobDetails>> {
+		return this.http.get<Array<JobDetails>>(
+			`${environment.apiUrl}/get-jobs/${offset}`
+		)
 	}
 
 	getEmployerJobs() {

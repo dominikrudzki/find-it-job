@@ -38,7 +38,7 @@ export class PostJobComponent implements OnInit {
 	})
 
 	myControl = new FormControl()
-	options: string[] = environment.technologies
+	options: string[] = environment.skills
 	filteredOptions: Observable<string[]>
 
 	@ViewChild('skill') skillInput!: ElementRef
