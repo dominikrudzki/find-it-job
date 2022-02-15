@@ -17,6 +17,10 @@ const routes: Routes = [
 		component: JobsPageComponent
 	},
 	{
+		path: 'search/:skills/:remote/:experience/:salary',
+		component: JobsPageComponent
+	},
+	{
 		path: 'job-offers/:jobId',
 		component: JobPreviewComponent
 	},
@@ -60,7 +64,9 @@ const routes: Routes = [
 ]
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes)],
+	imports: [RouterModule.forRoot(routes, {
+		scrollPositionRestoration: 'enabled'
+	})],
 	exports: [RouterModule]
 })
 export class AppRoutingModule {
