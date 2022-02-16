@@ -11,18 +11,6 @@ body {
 		border-radius: 0;
 	}
 
-	.mat-select-panel {
-		background-color: #6b6a6a;
-
-		button {
-			color: #fff;
-
-			.mat-icon {
-				color: #fff;
-			}
-		}
-	}
-
 	mat-list-item .mat-list-item-content {
 		display: flex;
 		flex-direction: row-reverse !important;
