@@ -34,7 +34,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatSliderModule } from '@angular/material/slider'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatTableModule } from '@angular/material/table'
-
+import { MatPaginatorModule } from '@angular/material/paginator'
 
 import { CurrencyPipe } from './core/pipes/currency.pipe'
 import { HttpClientModule } from "@angular/common/http"
@@ -49,7 +49,8 @@ import { MatDividerModule } from '@angular/material/divider'
 import { MatSelectModule } from "@angular/material/select"
 import { MatAutocompleteModule } from "@angular/material/autocomplete"
 import { ConfirmDialogComponent } from "./shared/dialogs/confirm-dialog/confirm-dialog.component"
-import { ApplicationsComponent } from './shared/dialogs/applications/applications.component'
+import { ApplicationsComponent } from './shared/dialogs/applications/applications.component';
+import { PaginatorComponent } from './jobs-page/paginator/paginator.component'
 
 const materialModules = [
 	MatToolbarModule,
@@ -69,7 +70,8 @@ const materialModules = [
 	MatSliderModule,
 	MatSnackBarModule,
 	MatTableModule,
-	MatDividerModule
+	MatDividerModule,
+	MatPaginatorModule
 ]
 
 @NgModule({
@@ -91,7 +93,8 @@ const materialModules = [
 		BackButtonComponent,
 		ChangeCompanyImageComponent,
 		ConfirmDialogComponent,
-		ApplicationsComponent
+		ApplicationsComponent,
+  PaginatorComponent
 	],
 	imports: [
 		BrowserModule,
