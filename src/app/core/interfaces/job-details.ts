@@ -8,5 +8,6 @@ export interface JobDetails {
 	description?: string;
 	benefits?: Array<string>;
 	experience: 'Junior' | 'Mid' | 'Senior';
-	skills?: any; // FIXME: fix type
+	skills: Array<{ name: string, level: number }>;
+	job_length?: number
 }
