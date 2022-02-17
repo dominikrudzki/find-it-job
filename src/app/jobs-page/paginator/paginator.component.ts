@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core'
 import { Router } from "@angular/router"
+import { MatPaginator, PageEvent } from "@angular/material/paginator"
 
 @Component({
 	selector: 'app-paginator',
@@ -8,10 +9,28 @@ import { Router } from "@angular/router"
 })
 export class PaginatorComponent implements OnInit {
 	@Input() jobListLength: number = 0
+	@Input() pageIndex!: number
+
+	@Output() offsetEmitter = new EventEmitter<number>()
+
+	@ViewChild(MatPaginator) paginator!: MatPaginator
 
 	constructor(private router: Router) {
 	}
 
 	ngOnInit(): void {
+	}
+
+	ngOnChanges(): void {
+		// this.pageIndex = 0
+	}
+
+	getPageOffset(event: PageEvent) {
+		this.router.navigate(['/'],
+			{
+				queryParams: {'page': event.pageIndex},
+				queryParamsHandling: 'merge'
+			})
+		this.offsetEmitter.emit(event.pageIndex)
 	}
 }

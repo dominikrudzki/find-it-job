@@ -1,6 +1,8 @@
 <mat-paginator
 	[length]="jobListLength"
 	[pageSize]="5"
-	[pageSizeOptions]="[5, 10, 15]"
-	aria-label="Select page">
-</mat-paginator>
+	hidePageSize="true"
+	[pageIndex]="pageIndex"
+	(page)="getPageOffset($event)"
+	aria-label="Select page"
+></mat-paginator>
