@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core'
-import { BehaviorSubject, debounceTime, distinctUntilChanged, map, Observable, skip, startWith } from "rxjs"
+import { BehaviorSubject, debounceTime, distinctUntilChanged, map, Observable, skip, startWith, take } from "rxjs"
 import { FormControl } from "@angular/forms"
 import { COMMA, ENTER } from "@angular/cdk/keycodes"
 import { MatAutocompleteSelectedEvent, MatAutocompleteTrigger } from "@angular/material/autocomplete"
@@ -44,7 +44,7 @@ export class FiltersComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.route.queryParams.subscribe(params => {
+		this.route.queryParams/*.pipe(take(1))*/.subscribe(params => {
 			this.filters.next({
 				skills: params['skills'] ? params['skills'].split(',') : [],
 				remote: params['remote'] ? params['remote'] : 'any',
@@ -54,10 +54,12 @@ export class FiltersComponent implements OnInit {
 		})
 
 		this.filters.pipe(
-			debounceTime(0), // environment.searchDelay // FIXME: no debounce time at first load
+			debounceTime(0), // FIXME: no debounce time at first load
 			distinctUntilChanged()
 		).subscribe(res => {
-			console.log(this.firstEntry)
+			console.log('RES', res)
+			console.log('✅ FILTERS CHANGE ✅')
+			// this.resetRoute()
 
 			let body: Filters = {...res}
 
@@ -67,8 +69,8 @@ export class FiltersComponent implements OnInit {
 			body['salary'] = body['salary'] === 0 ? undefined : body['salary']
 
 			console.log('BODY 😎', body)
-
 			this.filtersEmitter.emit(body)
+
 			this.firstEntry = false
 		})
 	}
@@ -111,6 +113,7 @@ export class FiltersComponent implements OnInit {
 	remoteChange(event: MatRadioChange) {
 		this.filters.next({...this.filters.value, remote: event.value})
 		this.navigate({'remote': event.value})
+		// this.resetRoute()
 	}
 
 	experienceChange(event: MatRadioChange) {
@@ -118,17 +121,25 @@ export class FiltersComponent implements OnInit {
 		if (event.value !== null) experience = event.value
 		this.filters.next({...this.filters.value, experience})
 		this.navigate({'exp': event.value})
+		// this.resetRoute()
 	}
 
 	salaryChange(salary: number) {
 		this.filters.next({...this.filters.value, salary})
 		this.navigate({'salary': salary})
+		// this.resetRoute()
 	}
 
 	private _filter(value: string): string[] {
 		const filterValue = value.toLowerCase()
 
 		return this.allSkills.filter(technology => technology.toLowerCase().includes(filterValue))
+	}
+
+	resetRoute() {
+		// if (this.route.snapshot.queryParamMap.get("page")) {
+		// 	this.navigate({'page': null})
+		// }
 	}
 
 	private navigate(param: Params) {
