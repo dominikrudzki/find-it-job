@@ -21,7 +21,7 @@ export class JobDataService {
 		return this.http.get<JobDetails>(`${environment.apiUrl}/get-job/${id}`)
 	}
 
-	getJobs(offset: number = 0, params: Filters | undefined): Observable<Array<JobDetails>> {
+	getJobs(offset: number = 0, params?: Filters): Observable<Array<JobDetails>> {
 		return this.http.post<Array<JobDetails>>(
 			`${environment.apiUrl}/get-jobs/${offset}`,
 			params
