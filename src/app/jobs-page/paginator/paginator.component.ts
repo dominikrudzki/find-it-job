@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { Router } from "@angular/router"
 
 @Component({
@@ -7,15 +7,11 @@ import { Router } from "@angular/router"
 	styleUrls: ['./paginator.component.scss']
 })
 export class PaginatorComponent implements OnInit {
+	@Input() jobListLength: number = 0
 
 	constructor(private router: Router) {
 	}
 
 	ngOnInit(): void {
-	}
-
-	onclick() {
-		this.router.navigate(['/'], {queryParams: {type: 'firstRegister'}})
-		console.log('ggg')
 	}
 }
