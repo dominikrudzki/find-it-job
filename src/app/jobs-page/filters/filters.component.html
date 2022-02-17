@@ -1,14 +1,31 @@
 <section class="filters">
 	<div class="categories">
-		<mat-card class="category" *ngFor="let category of categories">
-			<label>
-				<mat-checkbox
-					(change)="categoryHandle($event)"
-					class="example-margin"
-					[id]="category"
-				>{{ category }}</mat-checkbox>
-			</label>
-		</mat-card>
+		<mat-form-field class="chip-list" appearance="fill">
+			<mat-label>Skills</mat-label>
+			<mat-chip-list #chipList aria-label="Skills selection">
+				<mat-chip
+					*ngFor="let skill of filters.value.skills"
+					(removed)="remove(skill)">
+					{{skill}}
+					<button matChipRemove>
+						<mat-icon>cancel</mat-icon>
+					</button>
+				</mat-chip>
+				<input
+					placeholder="Search.."
+					#techInput
+					[formControl]="skillsForm"
+					[matAutocomplete]="auto"
+					[matChipInputFor]="chipList"
+					[matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+					(matChipInputTokenEnd)="add($event)">
+			</mat-chip-list>
+			<mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+				<mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
+					{{skill}}
+				</mat-option>
+			</mat-autocomplete>
+		</mat-form-field>
 	</div>
 
 	<mat-expansion-panel
@@ -20,27 +37,35 @@
 		</mat-expansion-panel-header>
 
 		<p>Remote:</p>
-		<mat-radio-group id="remote" (change)="remoteHandle($event)">
-			<mat-radio-button [checked]="true">Any</mat-radio-button>
+		<mat-radio-group
+			id="remote"
+			[value]="this.filters.value.remote"
+			(change)="remoteChange($event)"
+		>
+			<mat-radio-button value="any">Any</mat-radio-button>
 			<mat-radio-button value="true">Yes</mat-radio-button>
 			<mat-radio-button value="false">No</mat-radio-button>
 		</mat-radio-group>
 		<p>Experience:</p>
-		<mat-radio-group id="exp" (change)="experienceHandle($event)">
-			<mat-radio-button [checked]="true">Any</mat-radio-button>
-			<mat-radio-button value="Junior">Junior</mat-radio-button>
-			<mat-radio-button value="Mid">Mid</mat-radio-button>
-			<mat-radio-button value="Senior">Senior</mat-radio-button>
+		<mat-radio-group
+			[(ngModel)]="this.filters.value.experience"
+			(change)="experienceChange($event)"
+		>
+			<mat-radio-button value="any">Any</mat-radio-button>
+			<mat-radio-button value="junior">Junior</mat-radio-button>
+			<mat-radio-button value="mid">Mid</mat-radio-button>
+			<mat-radio-button value="senior">Senior</mat-radio-button>
 		</mat-radio-group>
 		<p class="salary">
 			Min. salary:
 			<span>
-				{{ preferences.value.minSalary || salary.value / 1000 + "k" }}
-				USD
+				{{ 0 || salary.value / 1000 + "k" }} USD
 			</span>
 		</p>
 		<mat-slider
 			#salary
+			[(ngModel)]="filters.value.salary"
+			(ngModelChange)="salaryChange(salary.value)"
 			tickInterval="1000"
 			step="1000"
 			min="0"
@@ -48,27 +73,4 @@
 			aria-label="units"
 		></mat-slider>
 	</mat-expansion-panel>
-
-	<!-- <mat-card *ngIf="showPreferences">
-		<mat-card-subtitle> You are searching for: </mat-card-subtitle>
-		<mat-card-content>
-			<span class="remote" *ngIf="preferences.value.remote != null">
-				{{ preferences.value.remote ? "Remote" : "Not remote" }}
-			</span>
-			<span class="experience" *ngIf="preferences.value.experience">
-				{{ preferences.value.experience }}
-			</span>
-			<span
-				class="technologies"
-				*ngIf="preferences.value.technologies?.length !== 0"
-			>
-				<span
-					class="tech"
-					*ngFor="let tech of preferences.value.technologies"
-				>
-					{{ tech }}
-				</span>
-			</span>
-		</mat-card-content>
-	</mat-card> -->
 </section>

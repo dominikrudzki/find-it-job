@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { JobDataService } from "../core/services/job-data.service"
 import { JobDetails } from "../core/interfaces/job-details"
+import { Filters } from "../core/interfaces/filters"
 
 @Component({
 	selector: 'app-jobs-page',
@@ -10,29 +11,25 @@ import { JobDetails } from "../core/interfaces/job-details"
 export class JobsPageComponent implements OnInit {
 	jobList: Array<JobDetails> = []
 	jobsOffset: number = 0
-	btnVisible: boolean = true
 
 	constructor(private jobData: JobDataService) {
 	}
 
 	ngOnInit(): void {
-		// TODO: check if array of jobs is empty, if yes send request to get jobs
-		this.loadJobs()
+		// this.loadJobs(false)
 	}
 
 	loadMoreJobs() {
-		//	TODO: load few more jobs
 		this.jobsOffset += 5
-		this.loadJobs()
+		this.loadJobs(true)
 	}
 
-	loadJobs() {
-		this.jobData.getJobs(this.jobsOffset).subscribe({
+	loadJobs(concat: boolean, event?: Filters) {
+		console.log('EVENT', event)
+		this.jobData.getJobs(this.jobsOffset, event).subscribe({
 			next: (val) => {
-				this.jobList = this.jobList.concat(val)
-				if (val.length < 5) {
-					this.btnVisible = false
-				}
+				console.log('VALUES:', val)
+				this.jobList = concat ? this.jobList.concat(val) : val
 			}
 		})
 	}
