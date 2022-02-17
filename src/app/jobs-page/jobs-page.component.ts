@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core'
 import { JobDataService } from "../core/services/job-data.service"
 import { JobDetails } from "../core/interfaces/job-details"
 import { Filters } from "../core/interfaces/filters"
+import { ActivatedRoute } from "@angular/router"
+import { Subscription } from "rxjs"
 
 @Component({
 	selector: 'app-jobs-page',
@@ -12,21 +14,33 @@ export class JobsPageComponent implements OnInit {
 	jobList: Array<JobDetails> = []
 	jobsOffset: number = 0
 
-	constructor(private jobData: JobDataService) {
+	$routeSub: Subscription
+
+	constructor(
+		private jobData: JobDataService,
+		private route: ActivatedRoute
+	) {
+		this.$routeSub =
+			this.route.queryParams.subscribe(params => {
+				this.jobsOffset = params['page'] ? params['page'] : 0
+			})
 	}
 
 	ngOnInit(): void {
-		// this.loadJobs(false)
 	}
 
-	loadMoreJobs() {
-		this.jobsOffset += 5
-		this.loadJobs(true)
+	ngOnDestroy(): void {
+		this.$routeSub.unsubscribe()
+	}
+
+	setJobsOffset(event: number): void {
+		this.jobsOffset = event
+		this.loadJobs(false)
 	}
 
 	loadJobs(concat: boolean, event?: Filters) {
-		console.log('EVENT', event)
-		this.jobData.getJobs(this.jobsOffset, event).subscribe({
+		console.log("offset", this.jobsOffset)
+		this.jobData.getJobs(this.jobsOffset * 5, event).subscribe({
 			next: (val) => {
 				console.log('VALUES:', val)
 				this.jobList = concat ? this.jobList.concat(val) : val

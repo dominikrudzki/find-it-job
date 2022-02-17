@@ -4,5 +4,7 @@
 	<app-paginator
 		*ngIf="jobList.length > 0"
 		[jobListLength]="jobList[0]!.job_length!"
+		[pageIndex]="jobsOffset"
+		(offsetEmitter)="setJobsOffset($event)"
 	></app-paginator>
 </section>
