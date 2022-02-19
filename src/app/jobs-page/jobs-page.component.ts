@@ -23,6 +23,7 @@ export class JobsPageComponent implements OnInit {
 		this.$routeSub =
 			this.route.queryParams.subscribe(params => {
 				this.jobsOffset = params['page'] ? params['page'] : 0
+				console.log(this.jobsOffset)
 			})
 	}
 

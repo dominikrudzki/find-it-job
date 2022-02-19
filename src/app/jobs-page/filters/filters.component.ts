@@ -45,6 +45,7 @@ export class FiltersComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.route.queryParams/*.pipe(take(1))*/.subscribe(params => {
+			console.log(params)
 			this.filters.next({
 				skills: params['skills'] ? params['skills'].split(',') : [],
 				remote: params['remote'] ? params['remote'] : 'any',
@@ -113,7 +114,6 @@ export class FiltersComponent implements OnInit {
 	remoteChange(event: MatRadioChange) {
 		this.filters.next({...this.filters.value, remote: event.value})
 		this.navigate({'remote': event.value})
-		// this.resetRoute()
 	}
 
 	experienceChange(event: MatRadioChange) {
@@ -121,13 +121,11 @@ export class FiltersComponent implements OnInit {
 		if (event.value !== null) experience = event.value
 		this.filters.next({...this.filters.value, experience})
 		this.navigate({'exp': event.value})
-		// this.resetRoute()
 	}
 
 	salaryChange(salary: number) {
 		this.filters.next({...this.filters.value, salary})
 		this.navigate({'salary': salary})
-		// this.resetRoute()
 	}
 
 	private _filter(value: string): string[] {
@@ -136,17 +134,12 @@ export class FiltersComponent implements OnInit {
 		return this.allSkills.filter(technology => technology.toLowerCase().includes(filterValue))
 	}
 
-	resetRoute() {
-		// if (this.route.snapshot.queryParamMap.get("page")) {
-		// 	this.navigate({'page': null})
-		// }
-	}
-
 	private navigate(param: Params) {
 		this.router.navigate(
-			['/'],
+			[''],
 			{
-				queryParams: param,
+				relativeTo: this.route,
+				queryParams: {...param, 'page': null},
 				queryParamsHandling: 'merge'
 			}
 		)
