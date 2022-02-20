@@ -52,12 +52,12 @@
 		</mat-card-content>
 	</mat-card>
 
-	<div class="apply-btn">
+	<div class="apply-btn" *ngIf="!(isEmployer | async)">
 		<button
 			mat-raised-button
 			color="accent"
 			(click)="apply()"
-			[disabled]=applied
+			[disabled]='applied || !(isLogged | async)'
 		>
 			{{applied ? 'Successfully applied' : 'Apply' }}
 		</button>

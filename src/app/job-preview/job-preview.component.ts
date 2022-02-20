@@ -5,6 +5,9 @@ import { ActivatedRoute } from "@angular/router"
 import { environment } from "../../environments/environment"
 import { DeveloperService } from "../core/services/developer.service"
 import { SnackbarService } from "../core/services/snackbar.service"
+import { Store } from "@ngrx/store"
+import { UserInfo } from "../core/interfaces/user-info"
+import { Observable } from "rxjs"
 
 @Component({
 	selector: 'app-job-preview',
@@ -15,6 +18,8 @@ export class JobPreviewComponent implements OnInit {
 	job?: JobDetails
 	jobImageUrl = environment.imageUrl
 	applied: boolean = false
+	isLogged: Observable<boolean> = this.store.select(state => state.userInfo.isLogged)
+	isEmployer: Observable<boolean> = this.store.select(state => state.userInfo.isEmployer)
 
 	jobDataSub = this.jobData.getJob(Number(this.route.snapshot.paramMap.get('jobId'))).subscribe(val => {
 		this.job = val
@@ -24,7 +29,8 @@ export class JobPreviewComponent implements OnInit {
 		private jobData: JobDataService,
 		private route: ActivatedRoute,
 		private developerService: DeveloperService,
-		private snackbarService: SnackbarService
+		private snackbarService: SnackbarService,
+		private store: Store<{ userInfo: UserInfo }>
 	) {
 	}
 
@@ -37,11 +43,7 @@ export class JobPreviewComponent implements OnInit {
 				this.snackbarService.open('You applied this job')
 				this.applied = true
 			},
-			error: (err) => {
-				if (err.status = 401) {
-					// TODO: open login modal
-				}
-
+			error: () => {
 				this.snackbarService.open('Server error')
 			}
 		})
