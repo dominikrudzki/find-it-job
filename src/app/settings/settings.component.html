@@ -1,24 +1,25 @@
 <div class="settings">
 	<mat-card>
 		<mat-card-header>
-			<mat-card-subtitle>Account settings:</mat-card-subtitle>
+			<mat-card-subtitle>Account:</mat-card-subtitle>
+			<mat-card-subtitle>{{userEmail$ | async}}</mat-card-subtitle>
 		</mat-card-header>
 		<mat-card-content>
 			<a mat-raised-button color="accent" routerLink="change-password">Change password</a>
-			<a *ngIf="!($employer | async)" mat-raised-button color="accent" routerLink="my-applications">See my
+			<a *ngIf="!(employer$ | async)" mat-raised-button color="accent" routerLink="my-applications">See my
 				applications</a>
 		</mat-card-content>
 	</mat-card>
 
-	<mat-card *ngIf="$employer | async">
+	<mat-card *ngIf="employer$ | async">
 		<mat-card-header>
 			<div
-				*ngIf="$companyName | async"
+				*ngIf="companyName$ | async"
 				mat-card-avatar
 				class="company-logo"
-				[ngStyle]="{'background-image': 'url(' + ($companyImage | async) + ')'}"
+				[ngStyle]="{'background-image': 'url(' + (companyImage$ | async) + ')'}"
 			></div>
-			<mat-card-title>{{$companyName | async}}</mat-card-title>
+			<mat-card-title>{{companyName$ | async}}</mat-card-title>
 		</mat-card-header>
 		<mat-card-content>
 			<a mat-raised-button color="accent" routerLink="change-company-image">Change company image</a>
