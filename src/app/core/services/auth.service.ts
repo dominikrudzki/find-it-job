@@ -4,12 +4,11 @@ import { Observable } from "rxjs"
 import { environment } from "../../../environments/environment"
 import { RegisterData } from "../interfaces/register-data"
 import { LoginData } from "../interfaces/login-data"
-import jwt_decode from 'jwt-decode'
-import { jwtPayload } from "../interfaces/jwt-payload"
 import { LocalStorageService } from "./local-storage.service"
 import { resetUserInfo } from "../state/userInfo/userInfo.actions"
 import { Store } from "@ngrx/store"
 import { UserInfo } from "../interfaces/user-info"
+import { Router } from "@angular/router"
 
 @Injectable({
 	providedIn: 'root'
@@ -19,7 +18,8 @@ export class AuthService {
 	constructor(
 		private http: HttpClient,
 		private localStorageService: LocalStorageService,
-		private store: Store<{ userInfo: UserInfo }>
+		private store: Store<{ userInfo: UserInfo }>,
+		private router: Router
 	) {
 	}
 
@@ -43,6 +43,7 @@ export class AuthService {
 		this.localStorageService.removeItem('access-token')
 		this.localStorageService.removeItem('refresh-token')
 		this.store.dispatch(resetUserInfo())
+		this.router.navigate(['/'])
 	}
 
 	changePassword(password: string, newPassword: string): Observable<any> {
