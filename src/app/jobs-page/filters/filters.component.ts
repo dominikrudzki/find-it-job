@@ -1,5 +1,14 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core'
-import { BehaviorSubject, debounceTime, distinctUntilChanged, map, Observable, startWith } from "rxjs"
+import {
+	BehaviorSubject, debounce,
+	debounceTime,
+	distinctUntilChanged, EMPTY, first, iif,
+	map, mergeMap,
+	Observable, of,
+	skip,
+	startWith,
+	Subscription, switchMap, take, tap, timer
+} from "rxjs"
 import { FormControl } from "@angular/forms"
 import { COMMA, ENTER } from "@angular/cdk/keycodes"
 import { MatAutocompleteSelectedEvent, MatAutocompleteTrigger } from "@angular/material/autocomplete"
@@ -32,6 +41,12 @@ export class FiltersComponent implements OnInit {
 	@ViewChild(MatAutocompleteTrigger) autocomplete!: MatAutocompleteTrigger
 	@Output() filtersEmitter = new EventEmitter<Filters>()
 
+	queryParams$: Subscription
+	filters$!: Subscription
+
+	firstLoad = true
+
+
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router
@@ -40,32 +55,36 @@ export class FiltersComponent implements OnInit {
 			startWith(null),
 			map((skill: string | null) => (skill ? this._filter(skill) : this.allSkills.slice()))
 		)
+
+		this.queryParams$ =
+			this.route.queryParams.subscribe(params => {
+				// this.filters.next({
+				// 	skills: params['skills'] ? params['skills'].split(',') : [],
+				// 	remote: params['remote'] ? params['remote'] : 'any',
+				// 	experience: params['exp'] ? params['exp'] : 'any',
+				// 	salary: params['salary'] ? parseInt(params['salary']) : 0
+				// })
+			})
+
+		this.filters$ =
+			this.filters.pipe(
+				debounce(() => this.firstLoad ? timer(0) : timer(environment.searchDelay)),
+				distinctUntilChanged()
+			).subscribe(res => {
+				let body: Filters = {...res}
+
+				body['skills'] = body['skills']?.length === 0 ? undefined : body['skills']!.map(val => val.toLowerCase())
+				body['remote'] = body['remote'] === 'any' ? undefined : body['remote']
+				body['experience'] = body['experience'] === 'any' ? undefined : body['experience']
+				body['salary'] = body['salary'] === 0 ? undefined : body['salary']
+
+				this.filtersEmitter.emit(body)
+			})
+
 	}
 
 	ngOnInit(): void {
-		this.route.queryParams/*.pipe(take(1))*/.subscribe(params => {
-			console.log(params)
-			this.filters.next({
-				skills: params['skills'] ? params['skills'].split(',') : [],
-				remote: params['remote'] ? params['remote'] : 'any',
-				experience: params['exp'] ? params['exp'] : 'any',
-				salary: params['salary'] ? parseInt(params['salary']) : 0
-			})
-		})
-
-		this.filters.pipe(
-			debounceTime(0), // FIXME: no debounce time at first load
-			distinctUntilChanged()
-		).subscribe(res => {
-			let body: Filters = {...res}
-
-			body['skills'] = body['skills']?.length === 0 ? undefined : body['skills']!.map(val => val.toLowerCase())
-			body['remote'] = body['remote'] === 'any' ? undefined : body['remote']
-			body['experience'] = body['experience'] === 'any' ? undefined : body['experience']
-			body['salary'] = body['salary'] === 0 ? undefined : body['salary']
-
-			this.filtersEmitter.emit(body)
-		})
+		this.firstLoad = false
 	}
 
 	add(event: MatChipInputEvent): void {
@@ -135,5 +154,10 @@ export class FiltersComponent implements OnInit {
 				queryParamsHandling: 'merge'
 			}
 		)
+	}
+
+	ngOnDestroy(): void {
+		this.queryParams$.unsubscribe()
+		this.filters$.unsubscribe()
 	}
 }
