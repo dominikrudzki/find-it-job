@@ -6,7 +6,7 @@ export const environment = {
 	production: false,
 	apiUrl: 'http://localhost:3000/api/v1',
 	imageUrl: 'http://localhost:3000/company_logos/',
-	searchDelay: 800, //ms
+	searchDelay: 400, //ms
 	skills: ['Angular', 'C', 'C++', 'CSS', 'Go', 'HTML', 'Java', 'JavaScript', 'Node', 'Python', 'React', 'Ruby']
 }
 
