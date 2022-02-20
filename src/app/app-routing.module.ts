@@ -26,7 +26,8 @@ const routes: Routes = [
 	},
 	{
 		path: 'post-job',
-		component: PostJobComponent
+		component: PostJobComponent,
+		canActivate: [IsEmployerGuard]
 	},
 	{
 		path: 'settings',
