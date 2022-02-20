@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core'
-import { BehaviorSubject, debounceTime, distinctUntilChanged, map, Observable, skip, startWith, take } from "rxjs"
+import { BehaviorSubject, debounceTime, distinctUntilChanged, map, Observable, startWith } from "rxjs"
 import { FormControl } from "@angular/forms"
 import { COMMA, ENTER } from "@angular/cdk/keycodes"
 import { MatAutocompleteSelectedEvent, MatAutocompleteTrigger } from "@angular/material/autocomplete"
@@ -20,7 +20,6 @@ export class FiltersComponent implements OnInit {
 	filteredSkills: Observable<string[]>
 	allSkills: string[] = environment.skills
 	panelOpenState = false
-	firstEntry: boolean = true
 
 	filters: BehaviorSubject<Filters> = new BehaviorSubject<Filters>({
 		skills: [],
@@ -58,10 +57,6 @@ export class FiltersComponent implements OnInit {
 			debounceTime(0), // FIXME: no debounce time at first load
 			distinctUntilChanged()
 		).subscribe(res => {
-			console.log('RES', res)
-			console.log('✅ FILTERS CHANGE ✅')
-			// this.resetRoute()
-
 			let body: Filters = {...res}
 
 			body['skills'] = body['skills']?.length === 0 ? undefined : body['skills']!.map(val => val.toLowerCase())
@@ -69,10 +64,7 @@ export class FiltersComponent implements OnInit {
 			body['experience'] = body['experience'] === 'any' ? undefined : body['experience']
 			body['salary'] = body['salary'] === 0 ? undefined : body['salary']
 
-			console.log('BODY 😎', body)
 			this.filtersEmitter.emit(body)
-
-			this.firstEntry = false
 		})
 	}
 

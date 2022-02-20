@@ -22,13 +22,12 @@ export class PaginatorComponent implements OnInit {
 	}
 
 	ngOnChanges(): void {
-		// this.pageIndex = 0
 	}
 
 	getPageOffset(event: PageEvent) {
 		this.router.navigate(['/'],
 			{
-				queryParams: {'page': event.pageIndex},
+				queryParams: {'page': event.pageIndex || null!},
 				queryParamsHandling: 'merge'
 			})
 		this.offsetEmitter.emit(event.pageIndex)
