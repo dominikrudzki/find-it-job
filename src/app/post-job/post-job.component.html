@@ -9,7 +9,8 @@
 		</mat-card-header>
 
 		<mat-card-content>
-			<form [formGroup]="addJobForm" novalidate (submit)="submitForm()">
+			<form [formGroup]="addJobForm" #form novalidate (submit)="submitForm(form)">
+
 				<mat-form-field appearance="fill">
 					<mat-label>Title</mat-label>
 					<input
@@ -18,6 +19,9 @@
 						formControlName="name"
 						maxlength="32"
 					>
+					<mat-error *ngIf="addJobForm.get('name')!.invalid">
+						Please enter a valid job title
+					</mat-error>
 				</mat-form-field>
 
 				<div class="experience">
@@ -55,6 +59,9 @@
 							formControlName="salaryMin"
 						>
 						<span matPrefix>$&nbsp;</span>
+						<mat-error *ngIf="addJobForm.get('salaryMin')!.invalid">
+							Invalid value
+						</mat-error>
 					</mat-form-field>
 					<mat-icon>remove</mat-icon>
 					<mat-form-field appearance="fill" floatLabel="always">
@@ -68,6 +75,9 @@
 							formControlName="salaryMax"
 						>
 						<span matPrefix>$&nbsp;</span>
+						<mat-error *ngIf="addJobForm.get('salaryMax')!.invalid">
+							Invalid value
+						</mat-error>
 					</mat-form-field>
 				</div>
 
@@ -129,7 +139,7 @@
 							</mat-autocomplete>
 							<mat-form-field appearance="fill">
 								<mat-label>Exp</mat-label>
-								<mat-select name="exp" [(value)]="selectOption" #exp>
+								<mat-select [(value)]="selectOption" #exp>
 									<mat-option value="1">1</mat-option>
 									<mat-option value="2">2</mat-option>
 									<mat-option value="3">3</mat-option>

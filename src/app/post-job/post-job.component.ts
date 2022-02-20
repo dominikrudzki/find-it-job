@@ -2,10 +2,11 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { ENTER } from "@angular/cdk/keycodes"
 import { MatChipInputEvent } from "@angular/material/chips"
 import { map, Observable, startWith } from "rxjs"
-import { FormControl, FormGroup, Validators } from "@angular/forms"
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { environment } from "../../environments/environment"
 import { JobDataService } from "../core/services/job-data.service"
 import { SnackbarService } from "../core/services/snackbar.service"
+import { greaterNumberValidator } from "../core/validators/greater-number.validator"
 
 interface Item {
 	name: string,
@@ -23,7 +24,7 @@ export class PostJobComponent implements OnInit {
 	benefits: Array<string> = []
 	skills: Array<Item> = []
 
-	addJobForm: FormGroup = new FormGroup({
+	addJobForm: FormGroup = this.fb.group({
 		name: new FormControl(
 			'',
 			[Validators.required,
@@ -31,10 +32,20 @@ export class PostJobComponent implements OnInit {
 				Validators.maxLength(32)
 			]),
 		remote: new FormControl('', [Validators.required]),
-		salaryMin: new FormControl('', [Validators.required]),
-		salaryMax: new FormControl('', [Validators.required]),
-		description: new FormControl('', [Validators.required]),
+		salaryMin: new FormControl('', [
+			Validators.required,
+			Validators.pattern("^[0-9]*$"),
+			Validators.maxLength(6)
+		]),
+		salaryMax: new FormControl('', [
+			Validators.required,
+			Validators.pattern("^[0-9]*$"),
+			Validators.maxLength(6)
+		]),
+		description: new FormControl(''),
 		experience: new FormControl('', [Validators.required])
+	}, {
+		validator: greaterNumberValidator('salaryMin', 'salaryMax')
 	})
 
 	myControl = new FormControl()
@@ -45,7 +56,8 @@ export class PostJobComponent implements OnInit {
 
 	constructor(
 		private jobDataService: JobDataService,
-		private snackbarService: SnackbarService
+		private snackbarService: SnackbarService,
+		private fb: FormBuilder
 	) {
 		this.filteredOptions = this.myControl.valueChanges.pipe(
 			startWith(''),
@@ -85,14 +97,13 @@ export class PostJobComponent implements OnInit {
 		}
 	}
 
-	submitForm() {
+	submitForm(form: HTMLFormElement) {
 		if (this.addJobForm.valid) {
 			this.jobDataService.addJob(
 				{
 					name: this.addJobForm.get('name')?.value,
 					remote: this.addJobForm.get('remote')?.value === "true",
 					benefits: this.benefits,
-					company: "", // TODO: get your company from store
 					description: this.addJobForm.get('description')?.value,
 					experience: this.addJobForm.get('experience')?.value,
 					salary: {
@@ -103,14 +114,14 @@ export class PostJobComponent implements OnInit {
 				}
 			).subscribe({
 				next: () => {
+					form.reset()
 					this.addJobForm.reset()
 					this.benefits = []
 					this.skills = []
 					this.snackbarService.open('Job added')
 				},
-				error: (err) => {
+				error: () => {
 					this.snackbarService.open('Failed to add a job')
-					console.log(err)
 				}
 			})
 		} else {
