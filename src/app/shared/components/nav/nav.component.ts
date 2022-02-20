@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { LoginDialogComponent } from '../../dialogs/login-dialog/login-dialog.component'
 import { UserInfo } from "../../../core/interfaces/user-info"
-import { resetUserInfo } from "../../../core/state/userInfo/userInfo.actions"
 import { LocalStorageService } from "../../../core/services/local-storage.service"
 import { Router } from '@angular/router'
 import { ConfirmDialogComponent } from "../../dialogs/confirm-dialog/confirm-dialog.component"
@@ -54,10 +53,8 @@ export class NavComponent implements OnInit {
 		this.isOpen = !this.isOpen
 	}
 
-	openDialog(employer: boolean): void {
-		this.dialog.open(LoginDialogComponent, {
-			data: employer
-		})
+	openDialog(): void {
+		this.dialog.open(LoginDialogComponent)
 	}
 
 	toggleTheme(): void {

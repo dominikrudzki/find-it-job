@@ -19,43 +19,39 @@
 				<mat-list-item role="listitem">
 					<a mat-button routerLink="/">Jobs</a>
 				</mat-list-item>
-				<mat-list-item role="listitem" *ngIf="($isLogged | async) && ($isEmployer | async) === false">
-					<a mat-button routerLink="/">Matchmaking</a>
-				</mat-list-item>
 				<mat-list-item role="listitem" *ngIf="($isLogged | async) && ($isEmployer | async)">
 					<a mat-button routerLink="/post-job">Post a job</a>
 				</mat-list-item>
 				<mat-list-item role="listitem">
-					<a
+					<button
+						*ngIf="!($isLogged | async)"
 						mat-raised-button
-						[matMenuTriggerFor]="menu"
 						color="accent"
-					>{{ ($isLogged | async) ? "Profile" : "Sign in" }}
-						<mat-icon>expand_more</mat-icon>
-					</a>
-					<mat-menu #menu="matMenu" [ngSwitch]="$isLogged | async">
+						(click)="openDialog()"
+					>
+						Sign in
+						<mat-icon>login</mat-icon>
+					</button>
+
+					<ng-container *ngIf="$isLogged | async">
 						<button
-							mat-menu-item
-							*ngSwitchCase="false"
-							(click)="openDialog(false)"
+							mat-raised-button
+							[matMenuTriggerFor]="menu"
+							color="accent"
 						>
-							as developer
-						</button>
-						<button
-							mat-menu-item
-							*ngSwitchCase="false"
-							(click)="openDialog(true)"
-						>
-							as employer
+							Profile
+							<mat-icon>expand_more</mat-icon>
 						</button>
 
-						<button mat-menu-item *ngSwitchCase="true" routerLink="settings">
-							Settings
-						</button>
-						<button mat-menu-item *ngSwitchCase="true" (click)="logout()">
-							Logout
-						</button>
-					</mat-menu>
+						<mat-menu #menu="matMenu">
+							<button mat-menu-item routerLink="settings">
+								Settings
+							</button>
+							<button mat-menu-item (click)="logout()">
+								Logout
+							</button>
+						</mat-menu>
+					</ng-container>
 				</mat-list-item>
 			</mat-list>
 		</div>
