@@ -1,44 +1,99 @@
 <mat-dialog-content class="mat-typography loginDialog">
-	<button
-		mat-icon-button
-		mat-dialog-close
-		aria-label="close dialog"
-		mat-dialog-close
-	>
-		<mat-icon>close</mat-icon>
-	</button>
 	<mat-tab-group color="accent" mat-align-tabs="center" dynamicHeight>
 		<mat-tab label="Login">
 			<form [formGroup]="loginGroup" (submit)="login()" novalidate>
 				<mat-form-field appearance="fill">
 					<mat-label>Enter your email</mat-label>
-					<input type="email" matInput required formControlName="email"/>
+					<input
+						type="email"
+						matInput
+						required
+						formControlName="email"
+					/>
 				</mat-form-field>
 				<mat-form-field appearance="fill">
 					<mat-label>Enter your password</mat-label>
-					<input type="password" matInput required formControlName="password"/>
+					<input
+						type="password"
+						autocomplete="off"
+						matInput
+						required
+						formControlName="password"
+					/>
 				</mat-form-field>
-				<button type="submit" [disabled]="loginGroup.invalid" mat-raised-button color="accent">Login</button>
+				<button
+					type="submit"
+					[disabled]="loginGroup.invalid"
+					mat-raised-button color="accent"
+				>
+					Login
+				</button>
 			</form>
 		</mat-tab>
+
 		<mat-tab label="Register">
-			<form [formGroup]="registerGroup" (submit)="register()" novalidate>
-				<mat-form-field *ngIf="role" appearance="fill">
-					<mat-label>Enter company name</mat-label>
-					<input matInput required formControlName="company_name"/>
-				</mat-form-field>
+			<form
+				[formGroup]="registerGroup"
+				#registerForm
+				(submit)="register(registerForm, slider.checked)"
+				novalidate
+			>
+
 				<mat-form-field appearance="fill">
 					<mat-label>Enter your email</mat-label>
-					<input matInput required formControlName="email"/>
+					<input
+						matInput
+						required
+						formControlName="email"
+					/>
+					<mat-error *ngIf="registerGroup.get('email')!.invalid">
+						Please enter a valid email address
+					</mat-error>
 				</mat-form-field>
+
+				<mat-slide-toggle #slider (change)="manageCompanyNameInput(slider.checked)">I'm Employer
+				</mat-slide-toggle>
+				<mat-form-field appearance="fill">
+					<mat-label>Enter company name</mat-label>
+					<input
+						matInput
+						autocomplete="off"
+						formControlName="company_name"
+						required
+					/>
+					<mat-error *ngIf="registerGroup.get('company_name')!.invalid">
+						Please enter a valid company name
+					</mat-error>
+				</mat-form-field>
+
 				<mat-form-field appearance="fill">
 					<mat-label>Enter your password</mat-label>
-					<input type="password" matInput required formControlName="password"/>
+					<input
+						type="password"
+						autocomplete="off"
+						matInput
+						required
+						formControlName="password"
+					/>
+					<mat-error *ngIf="registerGroup.get('password')!.invalid">
+						Please enter a valid password
+					</mat-error>
 				</mat-form-field>
+
 				<mat-form-field appearance="fill">
 					<mat-label>Repeat your password</mat-label>
-					<input type="password" matInput required formControlName="repeatPassword"/>
+					<input
+						type="password"
+						autocomplete="off"
+						matInput
+						required
+						formControlName="repeatPassword"
+					/>
+					<mat-error *ngIf="registerGroup.get('repeatPassword')!.invalid">
+						Please enter a valid confirm password
+					</mat-error>
 				</mat-form-field>
+
 				<button type="submit" [disabled]="registerGroup.invalid" mat-raised-button color="accent">
 					Register
 				</button>

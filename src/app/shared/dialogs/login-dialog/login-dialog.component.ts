@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core'
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { Component, OnInit } from '@angular/core'
+import { MatDialogRef } from '@angular/material/dialog'
 import { AuthService } from "../../../core/services/auth.service"
-import { FormControl, FormGroup, Validators } from "@angular/forms"
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { SnackbarService } from "../../../core/services/snackbar.service"
 import { Store } from "@ngrx/store"
 import {
@@ -11,11 +11,11 @@ import {
 	setIsEmployer,
 	setIsLogged
 } from "../../../core/state/userInfo/userInfo.actions"
-import { Observable } from "rxjs"
 import { UserInfo } from "../../../core/interfaces/user-info"
 import { LocalStorageService } from "../../../core/services/local-storage.service"
 import jwtDecode from "jwt-decode"
 import { jwtPayload } from "../../../core/interfaces/jwt-payload"
+import { ConfirmPasswordValidator } from "../../../core/validators/confirm-password.validator"
 
 @Component({
 	selector: 'app-login-dialog',
@@ -23,9 +23,6 @@ import { jwtPayload } from "../../../core/interfaces/jwt-payload"
 	styleUrls: ['./login-dialog.component.scss']
 })
 export class LoginDialogComponent implements OnInit {
-	role: string | undefined
-	$isLogged: Observable<boolean> = this.store.select((state) => state.userInfo.isLogged)
-
 	loginGroup = new FormGroup({
 		email: new FormControl(
 			'',
@@ -37,7 +34,7 @@ export class LoginDialogComponent implements OnInit {
 		)
 	})
 
-	registerGroup = new FormGroup({
+	registerGroup = this.fb.group({
 		email: new FormControl(
 			'',
 			[Validators.required, Validators.email]),
@@ -50,32 +47,42 @@ export class LoginDialogComponent implements OnInit {
 		company_name: new FormControl(
 			'',
 			[Validators.minLength(3), Validators.maxLength(32)])
+	}, {
+		validator: ConfirmPasswordValidator('password', 'repeatPassword')
 	})
 
 	constructor(
 		public dialogRef: MatDialogRef<LoginDialogComponent>,
-		@Inject(MAT_DIALOG_DATA) private data: string,
 		private authService: AuthService,
 		private snackbar: SnackbarService,
 		private store: Store<{ userInfo: UserInfo }>,
-		private localStorageService: LocalStorageService
+		private localStorageService: LocalStorageService,
+		private fb: FormBuilder
 	) {
-		this.role = this.data
+		this.registerGroup.get('company_name')?.disable()
 	}
 
 	ngOnInit(): void {
-		if (this.data) {
-			this.registerGroup.get('company_name')?.setValidators(Validators.required)
+	}
+
+	manageCompanyNameInput(enable: boolean): void {
+		if (enable) {
+			this.registerGroup.get('company_name')?.enable()
+		} else {
+			this.registerGroup.get('company_name')?.disable()
 		}
 	}
 
-	register() {
+	register(form: HTMLFormElement, isEmployer: boolean): any {
 		if (this.registerGroup.valid) {
-			const obj = Object.assign(this.registerGroup.value, {employer: this.data})
+			const obj = Object.assign(
+				this.registerGroup.value,
+				{employer: isEmployer}
+			)
 
 			this.authService.register(obj).subscribe({
-				next: (value) => {
-					console.log(value)
+				next: () => {
+					form.reset()
 					this.registerGroup.reset()
 					this.snackbar.open('Account created!')
 				},
