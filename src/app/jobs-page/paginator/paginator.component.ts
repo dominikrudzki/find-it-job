@@ -21,9 +21,6 @@ export class PaginatorComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
-	ngOnChanges(): void {
-	}
-
 	getPageOffset(event: PageEvent) {
 		this.router.navigate(['/'],
 			{

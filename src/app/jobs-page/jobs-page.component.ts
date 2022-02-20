@@ -14,24 +14,19 @@ export class JobsPageComponent implements OnInit {
 	jobList: Array<JobDetails> = []
 	jobsOffset: number = 0
 
-	$routeSub: Subscription
+	routeSub$: Subscription
 
 	constructor(
 		private jobData: JobDataService,
 		private route: ActivatedRoute
 	) {
-		this.$routeSub =
+		this.routeSub$ =
 			this.route.queryParams.subscribe(params => {
 				this.jobsOffset = params['page'] ? params['page'] : 0
-				console.log(this.jobsOffset)
 			})
 	}
 
 	ngOnInit(): void {
-	}
-
-	ngOnDestroy(): void {
-		this.$routeSub.unsubscribe()
 	}
 
 	setJobsOffset(event: number): void {
@@ -43,9 +38,12 @@ export class JobsPageComponent implements OnInit {
 		console.log("offset", this.jobsOffset)
 		this.jobData.getJobs(this.jobsOffset * 5, event).subscribe({
 			next: (val) => {
-				console.log('VALUES:', val)
 				this.jobList = concat ? this.jobList.concat(val) : val
 			}
 		})
+	}
+
+	ngOnDestroy(): void {
+		this.routeSub$.unsubscribe()
 	}
 }

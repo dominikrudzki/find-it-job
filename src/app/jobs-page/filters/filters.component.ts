@@ -1,13 +1,6 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core'
 import {
-	BehaviorSubject, debounce,
-	debounceTime,
-	distinctUntilChanged, EMPTY, first, iif,
-	map, mergeMap,
-	Observable, of,
-	skip,
-	startWith,
-	Subscription, switchMap, take, tap, timer
+	BehaviorSubject, debounce, distinctUntilChanged, map, Observable, startWith, Subscription, timer
 } from "rxjs"
 import { FormControl } from "@angular/forms"
 import { COMMA, ENTER } from "@angular/cdk/keycodes"
@@ -46,7 +39,6 @@ export class FiltersComponent implements OnInit {
 
 	firstLoad = true
 
-
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router
@@ -58,12 +50,12 @@ export class FiltersComponent implements OnInit {
 
 		this.queryParams$ =
 			this.route.queryParams.subscribe(params => {
-				// this.filters.next({
-				// 	skills: params['skills'] ? params['skills'].split(',') : [],
-				// 	remote: params['remote'] ? params['remote'] : 'any',
-				// 	experience: params['exp'] ? params['exp'] : 'any',
-				// 	salary: params['salary'] ? parseInt(params['salary']) : 0
-				// })
+				this.filters.next({
+					skills: params['skills'] ? params['skills'].split(',') : [],
+					remote: params['remote'] ? params['remote'] : 'any',
+					experience: params['exp'] ? params['exp'] : 'any',
+					salary: params['salary'] ? parseInt(params['salary']) : 0
+				})
 			})
 
 		this.filters$ =
@@ -73,14 +65,13 @@ export class FiltersComponent implements OnInit {
 			).subscribe(res => {
 				let body: Filters = {...res}
 
-				body['skills'] = body['skills']?.length === 0 ? undefined : body['skills']!.map(val => val.toLowerCase())
-				body['remote'] = body['remote'] === 'any' ? undefined : body['remote']
-				body['experience'] = body['experience'] === 'any' ? undefined : body['experience']
-				body['salary'] = body['salary'] === 0 ? undefined : body['salary']
+				body.skills = body.skills?.length === 0 ? undefined : body.skills!.map(val => val.toLowerCase())
+				body.remote = body.remote === 'any' ? undefined : body.remote
+				body.experience = body.experience === 'any' ? undefined : body.experience
+				body.salary = body.salary === 0 ? undefined : body.salary
 
 				this.filtersEmitter.emit(body)
 			})
-
 	}
 
 	ngOnInit(): void {
