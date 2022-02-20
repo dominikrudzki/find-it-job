@@ -38,6 +38,9 @@ export class AppComponent {
 				this.authService.refreshToken().subscribe({
 					next: (val) => {
 						this.setDataFromToken(val.accessToken)
+					},
+					error: () => {
+						this.authService.logout()
 					}
 				})
 			}
