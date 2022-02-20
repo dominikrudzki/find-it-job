@@ -1,4 +1,5 @@
 <mat-paginator
+	*ngIf="this.jobListLength > 5"
 	[length]="jobListLength"
 	[pageSize]="5"
 	hidePageSize="true"

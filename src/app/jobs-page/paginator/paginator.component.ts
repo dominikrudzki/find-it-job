@@ -27,6 +27,6 @@ export class PaginatorComponent implements OnInit {
 				queryParams: {'page': event.pageIndex || null!},
 				queryParamsHandling: 'merge'
 			})
-		this.offsetEmitter.emit(event.pageIndex)
+		// this.offsetEmitter.emit(event.pageIndex)
 	}
 }
