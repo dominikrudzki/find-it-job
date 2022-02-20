@@ -22,14 +22,14 @@ export class UserApplicationsComponent implements OnInit {
 	ngOnInit(): void {
 		this.developerService.getUserApplications().subscribe({
 			next: val => this.applicationList = val,
-			error: () => this.snackbarService.open('Server error')
+			error: () => this.snackbarService.open('Server error', '', false)
 		})
 	}
 
 	deleteApplication(id: number) {
 		this.developerService.deleteUserApplication(id).subscribe({
 			next: () => this.applicationList = this.applicationList.filter(value => value.id !== id),
-			error: () => this.snackbarService.open('Server error')
+			error: () => this.snackbarService.open('Server error', '', false)
 		})
 	}
 }

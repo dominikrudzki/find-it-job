@@ -23,7 +23,7 @@ export class ApplicationsComponent implements OnInit {
 	ngOnInit(): void {
 		this.companyService.getJobApplications(this.data.jobId).subscribe({
 			next: val => this.userList = val,
-			error: () => this.snackbarService.open('Unable to load applications')
+			error: () => this.snackbarService.open('Unable to load applications', '', false)
 		})
 	}
 }

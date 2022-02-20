@@ -48,13 +48,13 @@ export class ChangeCompanyImageComponent implements OnInit {
 		if (this.inputFile) {
 			this.companyService.changeCompanyImage(this.inputFile).subscribe({
 				next: async (val) => {
-					this.snackbarService.open('Company logo updated')
+					this.snackbarService.open('Company logo updated', '', true)
 					this.localStorageService.setItem('c_img', val)
 					this.store.dispatch(setCompanyImage({companyImage: val}))
 					this.router.navigate(['/settings'])
 				},
 				error: () => {
-					this.snackbarService.open('Failed to update company logo')
+					this.snackbarService.open('Failed to update company logo', '', false)
 				}
 			})
 		}

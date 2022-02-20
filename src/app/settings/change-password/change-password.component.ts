@@ -40,10 +40,10 @@ export class ChangePasswordComponent implements OnInit {
 				this.changePasswordGroup.get('newPassword')!.value
 			).subscribe({
 				next: res => {
-					this.snackbarService.open(res.message)
+					this.snackbarService.open(res.message, '', true)
 					this.store.dispatch(setIsLogged({isLogged: false}))
 				},
-				error: (err) => this.snackbarService.open(err.error.message)
+				error: (err) => this.snackbarService.open(err.error.message, '', false)
 			})
 		}
 	}

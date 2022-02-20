@@ -24,8 +24,7 @@ export class ManageJobsComponent implements OnInit {
 	constructor(
 		private jobDataService: JobDataService,
 		public dialog: MatDialog,
-		private snackbarService: SnackbarService,
-		private authService: AuthService
+		private snackbarService: SnackbarService
 	) {
 	}
 
@@ -35,7 +34,7 @@ export class ManageJobsComponent implements OnInit {
 				this.jobList = val
 			},
 			error: () => {
-				this.snackbarService.open('Unable to load jobs')
+				this.snackbarService.open('Unable to load jobs', '', false)
 			}
 		})
 	}
@@ -56,10 +55,10 @@ export class ManageJobsComponent implements OnInit {
 				this.jobDataService.deleteJob(id).subscribe({
 					next: () => {
 						this.jobList = this.jobList.filter(job => job.id !== id)
-						this.snackbarService.open('Job deleted')
+						this.snackbarService.open('Job deleted', '', true)
 					},
 					error: () => {
-						this.snackbarService.open('Unable to delete job')
+						this.snackbarService.open('Unable to delete job', '', false)
 					}
 				})
 			}

@@ -7,6 +7,19 @@ body {
 	font-family: Roboto, "Helvetica Neue", sans-serif;
 	transition: background-color 0.3s;
 
+
+	.snackbar {
+		color: white;
+
+		&-valid {
+			background-color: #4BB543;
+		}
+
+		&-invalid {
+			background-color: #ff0033;
+		}
+	}
+
 	.mat-card-avatar {
 		border-radius: 0;
 	}
@@ -21,8 +34,14 @@ body {
 		color: #a5a5a5;
 	}
 
-	&.darkTheme {
+	&.darkTheme, {
 		background-color: #212120;
+
+		mat-paginator {
+			background-color: #212120;
+			color: white;
+
+		}
 
 		mat-card,
 		mat-list,

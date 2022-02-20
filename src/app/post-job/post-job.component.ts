@@ -118,14 +118,14 @@ export class PostJobComponent implements OnInit {
 					this.addJobForm.reset()
 					this.benefits = []
 					this.skills = []
-					this.snackbarService.open('Job added')
+					this.snackbarService.open('Job added', '', true)
 				},
 				error: () => {
-					this.snackbarService.open('Failed to add a job')
+					this.snackbarService.open('Failed to add a job', '', false)
 				}
 			})
 		} else {
-			this.snackbarService.open('Form is not valid')
+			this.snackbarService.open('Form is not valid', '', false)
 		}
 	}
 }

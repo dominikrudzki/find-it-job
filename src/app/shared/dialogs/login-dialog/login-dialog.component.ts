@@ -84,10 +84,10 @@ export class LoginDialogComponent implements OnInit {
 				next: () => {
 					form.reset()
 					this.registerGroup.reset()
-					this.snackbar.open('Account created!')
+					this.snackbar.open('Account created!', '', true)
 				},
 				error: () => {
-					this.snackbar.open('The error has been occurred. Please try again later')
+					this.snackbar.open('The error has been occurred. Please try again later', '', false)
 				}
 			})
 		}
@@ -110,9 +110,11 @@ export class LoginDialogComponent implements OnInit {
 
 					this.localStorageService.setItem('access-token', value.accessToken)
 					this.localStorageService.setItem('refresh-token', value.refreshToken)
+
+					this.snackbar.open('You are signed in!', '', true)
 				},
 				error: () => {
-					this.snackbar.open('Invalid credentials')
+					this.snackbar.open('Invalid credentials', '', false)
 				}
 			})
 		}

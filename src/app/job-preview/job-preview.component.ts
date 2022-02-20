@@ -40,11 +40,11 @@ export class JobPreviewComponent implements OnInit {
 	apply() {
 		this.developerService.applyForJob(this.job?.id!).subscribe({
 			next: () => {
-				this.snackbarService.open('You applied this job')
+				this.snackbarService.open('You applied this job', '', true)
 				this.applied = true
 			},
 			error: () => {
-				this.snackbarService.open('Server error')
+				this.snackbarService.open('Server error', '', false)
 			}
 		})
 	}
