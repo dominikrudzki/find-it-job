@@ -61,7 +61,7 @@ export class PostJobComponent implements OnInit {
 	) {
 		this.filteredOptions = this.myControl.valueChanges.pipe(
 			startWith(''),
-			map(value => this._filter(value))
+			map(value => value.length > 0 ? this._filter(value) : [])
 		)
 	}
 
@@ -87,6 +87,11 @@ export class PostJobComponent implements OnInit {
 			this.skills.push({name, level})
 			this.skillInput.nativeElement.value = ''
 			this.selectOption = "0"
+
+			this.filteredOptions = this.myControl.valueChanges.pipe(
+				startWith(''),
+				map(value => value.length > 0 ? this._filter(value) : [])
+			)
 		}
 	}
 
