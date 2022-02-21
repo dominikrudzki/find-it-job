@@ -6,6 +6,11 @@
 	margin-left: 1em;
 }
 
+.mat-toolbar-row {
+	max-width: 1400px;
+	margin: 0 auto;
+}
+
 .nav {
 	position: absolute;
 	overflow: hidden;
@@ -13,11 +18,10 @@
 	left: 0;
 	background-color: #ebebeb;
 	width: 100%;
-	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
 
 	max-height: 0;
 	transition: max-height 0.8s;
-	transition: all 0.3s ease-out;
 
 	&.hidden {
 		max-height: 152px;

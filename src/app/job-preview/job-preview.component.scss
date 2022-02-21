@@ -1,10 +1,12 @@
 :host {
 	padding-top: 15px;
 	display: block;
+	margin: 0 15px 15px 15px;
 }
 
 .job-card {
-	margin: 0px 15px 15px 15px;
+	max-width: 600px;
+	margin: 0 auto;
 
 	mat-card-header {
 		.image {

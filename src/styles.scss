@@ -21,14 +21,13 @@ body {
 
 
 	.mat {
-		&-card-avatar {
-			border-radius: 0;
+
+		&-form-field {
+			margin-bottom: 5px;
 		}
 
-		&-list-item &-list-item-content {
-			display: flex;
-			flex-direction: row-reverse !important;
-			justify-content: flex-end !important;
+		&-card-avatar {
+			border-radius: 0;
 		}
 
 		&-button-disabled span {
@@ -41,7 +40,8 @@ body {
 		background-color: #212120;
 
 		.mat {
-			&-icon {
+			&-icon,
+			&-card {
 				color: #fff
 			}
 
@@ -96,6 +96,7 @@ body {
 			&-list,
 			.loginDialog,
 			&-dialog-container,
+			&-toolbar,
 			&-toolbar-row,
 			&-expansion-panel {
 				background-color: #424141;
@@ -119,9 +120,16 @@ body {
 			}
 		}
 
-		.mat-expansion-panel:not(.mat-expanded):not([aria-disabled=true])
+		.mat-autocomplete-panel .mat-option.mat-selected:not(.mat-active):not(:hover),
+		.mat-expansion-panel:not(.mat-expanded):not([aria-disabled=true]),
 		.mat-expansion-panel-header:hover {
 			background-color: #424141;
+		}
+
+		.mat-list-item .mat-list-item-content {
+			display: flex;
+			flex-direction: row-reverse !important;
+			justify-content: flex-end !important;
 		}
 
 		table {
@@ -145,4 +153,19 @@ a:hover,
 a:active {
 	color: inherit;
 	text-decoration: unset;
+}
+
+.wrapper {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type=number] {
+	-moz-appearance: textfield;
 }
