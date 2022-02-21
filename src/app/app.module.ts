@@ -49,7 +49,7 @@ import { MatDividerModule } from '@angular/material/divider'
 import { MatSelectModule } from "@angular/material/select"
 import { MatAutocompleteModule } from "@angular/material/autocomplete"
 import { ConfirmDialogComponent } from "./shared/dialogs/confirm-dialog/confirm-dialog.component"
-import { ApplicationsComponent } from './shared/dialogs/applications/applications.component';
+import { ApplicationsComponent } from './shared/dialogs/applications/applications.component'
 import { PaginatorComponent } from './jobs-page/paginator/paginator.component'
 
 const materialModules = [
@@ -94,7 +94,7 @@ const materialModules = [
 		ChangeCompanyImageComponent,
 		ConfirmDialogComponent,
 		ApplicationsComponent,
-  PaginatorComponent
+		PaginatorComponent
 	],
 	imports: [
 		BrowserModule,
