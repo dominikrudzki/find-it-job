@@ -1,21 +1,24 @@
-<mat-card [routerLink]="['job-offers', job.id]" *ngIf="job">
-	<mat-card-header>
-		<div class="job-image">
-			<img
-				[src]="job.image ? jobImageUrl + job.image : 'https://cdn.pixabay.com/photo/2013/07/13/10/41/hat-157581_960_720.png'"
-				loading="lazy"
-				alt="{{job.company}}"
-			/>
-		</div>
-		<mat-card-title>{{job.name}}</mat-card-title>
-		<mat-card-subtitle>{{job.company}}</mat-card-subtitle>
-		<mat-card-subtitle class="salary" *ngIf="job.salary">
-			{{job.salary.min | currency}} - {{job.salary.max | currency}} USD
-		</mat-card-subtitle>
-	</mat-card-header>
-	<mat-card-content>
-		<div class="tech">
-			<p *ngFor="let tech of job.skills">{{tech.name}}</p>
-		</div>
-	</mat-card-content>
-</mat-card>
+<a *ngIf="job" [routerLink]="['job-offers', job.id]">
+	<mat-card>
+		<mat-card-header>
+			<div class="job-image">
+				<img
+					[src]="job.image ? jobImageUrl + job.image : 'https://cdn.pixabay.com/photo/2013/07/13/10/41/hat-157581_960_720.png'"
+					loading="lazy"
+					alt="{{job.company}}"
+				/>
+			</div>
+			<mat-card-title>{{job.name}}</mat-card-title>
+			<mat-card-subtitle>{{job.company}}</mat-card-subtitle>
+			<mat-card-subtitle class="salary" *ngIf="job.salary">
+				{{job.salary.min | currency}} - {{job.salary.max | currency}} USD
+			</mat-card-subtitle>
+		</mat-card-header>
+		<mat-card-content>
+			<div class="tech">
+				<p *ngFor="let tech of job.skills">{{tech.name}}</p>
+			</div>
+		</mat-card-content>
+	</mat-card>
+</a>
+
