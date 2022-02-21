@@ -23,10 +23,8 @@ export class IsEmployerGuard implements CanActivate {
 				isEmployer = val
 			}
 		)
-		if (isEmployer) {
-			return true
-		}
-		this.router.navigate(['/'])
+		if (isEmployer) return true
+		this.router.navigate(['/settings'])
 		return false
 	}
 
