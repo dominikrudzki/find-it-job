@@ -7,7 +7,8 @@ export const environment = {
 	apiUrl: 'http://localhost:3000/api/v1',
 	imageUrl: 'http://localhost:3000/company_logos/',
 	searchDelay: 400, //ms
-	skills: ['Angular', 'C', 'C++', 'CSS', 'Go', 'HTML', 'Java', 'JavaScript', 'Node', 'Python', 'React', 'Ruby']
+	skills: ['Angular', 'C', 'C++', 'CSS', 'Go', 'HTML', 'Java', 'JavaScript', 'Node', 'Python', 'React', 'Ruby'],
+	companyLogoMaxSize: 200000 // kb
 }
 
 /*

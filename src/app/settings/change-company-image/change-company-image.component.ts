@@ -6,6 +6,7 @@ import { Store } from "@ngrx/store"
 import { UserInfo } from "../../core/interfaces/user-info"
 import { LocalStorageService } from "../../core/services/local-storage.service"
 import { setCompanyImage } from "../../core/state/userInfo/userInfo.actions"
+import { environment } from "../../../environments/environment"
 
 @Component({
 	selector: 'app-change-company-image',
@@ -30,17 +31,20 @@ export class ChangeCompanyImageComponent implements OnInit {
 	}
 
 	onFileSelected(event: Event | any) {
-		if (event.target !== null || event.target.files.length === 0) {
-			this.updateBtnDisabled = false
+		if (event.target !== null || event.target?.files.length === 0) {
 
-			const reader = new FileReader()
-			reader.readAsDataURL(event.target.files[0])
-			reader.onload = () => {
-				this.imgSrc = reader.result
+			if (event.target.files[0].size < environment.companyLogoMaxSize) {
+
+				const reader = new FileReader()
+				reader.readAsDataURL(event.target.files[0])
+				reader.onload = () => this.imgSrc = reader.result
+
+				this.inputFile = event.target.files[0]
+				this.updateBtnDisabled = false
+
+			} else {
+				this.snackbarService.open(`File size must be less than ${environment.companyLogoMaxSize / 1000} kb`, '', false)
 			}
-
-			this.inputFile = event.target.files[0]
-			console.log(this.inputFile)
 		}
 	}
 
