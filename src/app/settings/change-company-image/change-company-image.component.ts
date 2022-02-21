@@ -51,7 +51,7 @@ export class ChangeCompanyImageComponent implements OnInit {
 	updateLogo() {
 		if (this.inputFile) {
 			this.companyService.changeCompanyImage(this.inputFile).subscribe({
-				next: async (val) => {
+				next: (val) => {
 					this.snackbarService.open('Company logo updated', '', true)
 					this.localStorageService.setItem('c_img', val)
 					this.store.dispatch(setCompanyImage({companyImage: val}))
