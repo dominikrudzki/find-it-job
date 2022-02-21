@@ -21,7 +21,7 @@
 	box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
 
 	max-height: 0;
-	transition: max-height 0.8s;
+	transition: max-height 0.3s;
 
 	&.hidden {
 		max-height: 152px;
