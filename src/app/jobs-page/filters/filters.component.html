@@ -57,10 +57,8 @@
 			<mat-radio-button value="senior">Senior</mat-radio-button>
 		</mat-radio-group>
 		<p class="salary">
-			Min. salary:
-			<span>
-				{{ 0 || salary.value / 1000 + "k" }} USD
-			</span>
+			Expected salary:
+			<span>{{ 0 || salary.value / 1000 + "k" }} USD</span>
 		</p>
 		<mat-slider
 			#salary

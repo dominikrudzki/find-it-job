@@ -35,7 +35,6 @@ export class JobsPageComponent implements OnInit {
 	}
 
 	loadJobs(concat: boolean, event?: Filters) {
-		console.log("offset", this.jobsOffset)
 		this.jobData.getJobs(this.jobsOffset * 5, event).subscribe({
 			next: (val) => {
 				this.jobList = concat ? this.jobList.concat(val) : val
