@@ -7,7 +7,6 @@ body {
 	font-family: Roboto, "Helvetica Neue", sans-serif;
 	transition: background-color 0.3s;
 
-
 	.snackbar {
 		color: white;
 
@@ -20,36 +19,107 @@ body {
 		}
 	}
 
-	.mat-card-avatar {
-		border-radius: 0;
+
+	.mat {
+		&-card-avatar {
+			border-radius: 0;
+		}
+
+		&-list-item &-list-item-content {
+			display: flex;
+			flex-direction: row-reverse !important;
+			justify-content: flex-end !important;
+		}
+
+		&-button-disabled span {
+			color: #a5a5a5;
+		}
 	}
 
-	mat-list-item .mat-list-item-content {
-		display: flex;
-		flex-direction: row-reverse !important;
-		justify-content: flex-end !important;
-	}
-
-	.mat-button-disabled span {
-		color: #a5a5a5;
-	}
 
 	&.darkTheme, {
 		background-color: #212120;
 
-		mat-paginator {
-			background-color: #212120;
-			color: white;
+		.mat {
+			&-icon {
+				color: #fff
+			}
 
+			&-paginator {
+				color: white;
+				background-color: #212120;
+			}
+
+			&-select-panel {
+				background-color: #424141;
+			}
+
+			&-menu-panel {
+				background-color: #424141;
+
+				button {
+					color: #fff;
+				}
+			}
+
+			&-dialog-container {
+				color: #fff;
+			}
+
+			&-form-field {
+				&-flex {
+					background-color: #7a7a7a;
+				}
+
+				&-underline::before {
+					background-color: #ffffff;
+				}
+			}
+
+			.mat-option.mat-selected:not(.mat-active):not(:hover):not(.mat-option-disabled) {
+				background-color: #424141;
+
+			}
+
+			&-autocomplete {
+				&-panel {
+					background-color: #424141;
+				}
+			}
+
+			&-chip.mat-standard-chip {
+				background-color: #424141;
+				color: #fff;
+			}
+
+			&-card,
+			&-list,
+			.loginDialog,
+			&-dialog-container,
+			&-toolbar-row,
+			&-expansion-panel {
+				background-color: #424141;
+			}
+
+			&-expansion-indicator::after {
+				border-color: #fff;
+			}
+
+			&-button-disabled span {
+				color: #a5a5a5;
+			}
+
+			&-label,
+			&-card-title,
+			&-panel-title,
+			&-card-subtitle,
+			&-tab-label-content,
+			&-expansion-panel-header-title {
+				color: #fff;
+			}
 		}
 
-		mat-card,
-		mat-list,
-		.loginDialog,
-		mat-dialog-container,
-		mat-toolbar-row,
-		mat-expansion-panel,
-		.mat-expansion-panel:not(.mat-expanded):not([aria-disabled="true"])
+		.mat-expansion-panel:not(.mat-expanded):not([aria-disabled=true])
 		.mat-expansion-panel-header:hover {
 			background-color: #424141;
 		}
@@ -59,29 +129,12 @@ body {
 			border-radius: 15px;
 		}
 
-
-		span,
-		.mat-expansion-indicator::after {
+		span {
 			border-color: #fff;
 		}
 
-		p,
-		h3,
-		td,
-		th,
-		li,
-		span,
-		mat-label,
-		input,
-		mat-card-title,
-		mat-panel-title,
-		mat-card-subtitle,
-		.mat-tab-label-content {
+		p, h3, td, th, li, span, input {
 			color: #fff;
-		}
-
-		.mat-button-disabled span {
-			color: #a5a5a5;
 		}
 	}
 }
