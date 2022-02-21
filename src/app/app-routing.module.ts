@@ -26,11 +26,6 @@ const routes: Routes = [
 		component: JobPreviewComponent
 	},
 	{
-		path: 'post-job',
-		component: PostJobComponent,
-		canActivate: [IsEmployerGuard]
-	},
-	{
 		path: 'settings',
 		runGuardsAndResolvers: 'always',
 		canActivate: [AuthGuard],
@@ -56,6 +51,11 @@ const routes: Routes = [
 			{
 				path: 'manage-jobs',
 				component: ManageJobsComponent,
+				canActivate: [IsEmployerGuard]
+			},
+			{
+				path: 'post-job',
+				component: PostJobComponent,
 				canActivate: [IsEmployerGuard]
 			}
 		]
