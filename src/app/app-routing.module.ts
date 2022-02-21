@@ -10,6 +10,7 @@ import { UserApplicationsComponent } from "./settings/user-applications/user-app
 import { ChangePasswordComponent } from "./settings/change-password/change-password.component"
 import { ChangeCompanyImageComponent } from "./settings/change-company-image/change-company-image.component"
 import { IsEmployerGuard } from "./core/guards/is-employer.guard"
+import { IsNotEmployerGuard } from "./core/guards/is-not-employer.guard"
 
 const routes: Routes = [
 	{
@@ -44,7 +45,8 @@ const routes: Routes = [
 			},
 			{
 				path: 'my-applications',
-				component: UserApplicationsComponent
+				component: UserApplicationsComponent,
+				canActivate: [IsNotEmployerGuard]
 			},
 			{
 				path: 'change-company-image',
