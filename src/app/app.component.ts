@@ -13,6 +13,7 @@ import { AuthService } from './core/services/auth.service'
 import { interval, mergeMap, Subscription } from "rxjs"
 import jwt_decode from "jwt-decode"
 import { jwtPayload } from "./core/interfaces/jwt-payload"
+import { HttpResponse } from "@angular/common/http"
 
 @Component({
 	selector: 'app-root',
@@ -37,7 +38,9 @@ export class AppComponent {
 			if (refreshToken) {
 				this.authService.refreshToken().subscribe({
 					next: (val) => this.setDataFromToken(val.accessToken),
-					error: () => this.authService.logout()
+					error: (err: HttpResponse<any>) => {
+						if (err.status === 401) this.authService.logout()
+					}
 				})
 			}
 		}
