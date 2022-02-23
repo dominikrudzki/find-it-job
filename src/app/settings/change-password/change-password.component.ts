@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
+import { FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { ConfirmPasswordValidator } from "../../core/validators/confirm-password.validator"
 import { SnackbarService } from "../../core/services/snackbar.service"
 import { AuthService } from "../../core/services/auth.service"
@@ -39,9 +39,10 @@ export class ChangePasswordComponent implements OnInit {
 				this.changePasswordGroup.get('password')!.value,
 				this.changePasswordGroup.get('newPassword')!.value
 			).subscribe({
-				next: res => {
-					this.snackbarService.open(res.message, '', true)
+				next: () => {
+					this.snackbarService.open('Password changed', '', true)
 					this.store.dispatch(setIsLogged({isLogged: false}))
+					this.authService.logout()
 				},
 				error: (err) => this.snackbarService.open(err.error.message, '', false)
 			})
