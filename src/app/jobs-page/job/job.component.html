@@ -3,7 +3,8 @@
 		<mat-card-header>
 			<div class="job-image">
 				<img
-					[src]="job.image ? jobImageUrl + job.image : 'https://cdn.pixabay.com/photo/2013/07/13/10/41/hat-157581_960_720.png'"
+					[src]="jobImageUrl + job.image"
+					(error)="job.image = 'default.png'"
 					loading="lazy"
 					alt="{{job.company}}"
 				/>
